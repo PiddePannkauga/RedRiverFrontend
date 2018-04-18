@@ -1,0 +1,21 @@
+.EventInfoDisplay-container{
+  display: grid;
+  grid-row-gap: 50px
+}
+
+.grid-item{
+
+}
+
+.EventInfoItem-Container{
+  background-color: yellow;
+  display: inline-grid;
+  grid-column-gap: 10px;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+
+}
+
+.Description{
+  grid-column: 1 / span 2;
+}
