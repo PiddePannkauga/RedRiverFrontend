@@ -6,10 +6,7 @@ class Logo extends Component{
 
   render(){
     return(
-
-
       <img className="logo" src={image} alt="Placeholder"></img>
-
     )
   }
 
