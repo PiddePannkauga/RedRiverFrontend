@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import '../styles/button.css';
+import {EventDisplayContext} from '../Providers/provider-eventdisplay'
 
 class FetchEventInfo extends Component{
 
@@ -9,9 +10,14 @@ class FetchEventInfo extends Component{
 
   render(){
     return(
-    <button className="FetchEventInfoButton">Hämta EventInfo</button>
+      <EventDisplayContext.Consumer>
+        {(context) => (
+          <button className="FetchEventInfoButton" onClick={()=>context.fetchEvent()}>Hämta EventInfo</button>
+        )}
+      </EventDisplayContext.Consumer>
     )
   }
+
 
 }
 

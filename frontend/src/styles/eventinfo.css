@@ -1,18 +1,20 @@
 .EventInfoDisplay-container{
-  display: grid;
-  grid-row-gap: 50px
+  display: grid
 }
 
 .grid-item{
 
 }
 
-.EventInfoItem-Container{
-  background-color: yellow;
-  display: inline-grid;
-  grid-column-gap: 10px;
+.EventInfoItem{
+  margin-bottom: 10px;
+  background-color: green;
+  display: grid;
+  grid-column-gap: 5px;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
+  margin-left: 50px;
+  margin-right:  50px;
 
 }
 
