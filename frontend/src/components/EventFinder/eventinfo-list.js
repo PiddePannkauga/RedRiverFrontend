@@ -3,7 +3,6 @@ import EventInfoItem from './eventinfo-item';
 import '../styles/eventinfo.css';
 
 const EventInfoList = (props) =>{
-  console.log(props.events)
   const eventinfoItems = props.events.map((obj)=>{
     return(
       <EventInfoItem key={obj.name} events={obj}/>
@@ -14,7 +13,5 @@ const EventInfoList = (props) =>{
         {eventinfoItems}
       </ul>
     )
-
   }
-
-  export default EventInfoList;
+export default EventInfoList;

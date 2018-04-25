@@ -17,8 +17,5 @@ class FetchEventInfo extends Component{
       </EventDisplayContext.Consumer>
     )
   }
-
-
 }
-
 export default FetchEventInfo;
