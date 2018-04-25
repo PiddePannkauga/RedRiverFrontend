@@ -31,7 +31,7 @@ export default class EventDisplayProvider extends Component{
 
   fetchEventInfo(){
 
-    return Axios.get('http://localhost:5000/api/user/events/?email=linda.rosing@gmail.com&auth=Leinigen').then(res => {
+    return Axios.get('http://localhost:5000/api/user/events?token=2345asdf').then(res => {
       return res.data
     })
   }
@@ -42,9 +42,7 @@ export default class EventDisplayProvider extends Component{
       <EventDisplayContext.Provider value= {{
         state: this.state,
         fetchEvent: (res) => {this.fetchEventInfo().then(res => {this.setState({events:res})})}
-
       }}>
-
       {this.props.children}
     </EventDisplayContext.Provider>
 

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import '../styles/button.css';
-import {EventDisplayContext} from '../Providers/provider-eventdisplay'
+import '../../styles/button.css';
+import {EventDisplayContext} from '../../providers/provider-eventdisplay'
 
 class FetchEventInfo extends Component{
 

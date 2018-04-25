@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import '../styles/eventinfo.css';
+import '../../styles/eventinfo.css';
 
 
 class EventInfoItem extends Component{
@@ -10,13 +10,13 @@ class EventInfoItem extends Component{
       <div>
         <div className="EventInfoItem">
           <div className="Name">
-            {this.props.events.name}
+            {this.props.events.name}  
           </div>
           <div className="Date">
-            {this.props.events.datum}
+            {this.props.events.date}
           </div>
           <div className="Description">
-            {this.props.events.beskrivning}
+            {this.props.events.description}
           </div>
         </div>
       </div>
