@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import LoginModal from './modal-login';
 
 class Button extends Component{
   constructor(props){
@@ -8,7 +8,7 @@ class Button extends Component{
 
   render(){
     return(
-      <button> {this.props.text} </button>
+      <button onClick={() => this.props.onClick()}> {this.props.text} </button>
     )
   }
 }

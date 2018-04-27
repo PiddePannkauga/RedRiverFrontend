@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import image from './eventsystemlogga_placeholder.png'
+import image from '../../img/eventsystemlogga_placeholder.png'
 import '../../styles/logo.css';
 
 class Logo extends Component{

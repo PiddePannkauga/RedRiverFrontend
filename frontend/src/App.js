@@ -5,8 +5,6 @@ import EventProvider from './providers/provider-eventdisplay';
 import SplashScreen from './components/splashscreen/splashscreen';
 
 
-
-
 class App extends Component {
   render() {
     return (
