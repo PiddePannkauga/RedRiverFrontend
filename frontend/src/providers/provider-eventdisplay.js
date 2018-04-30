@@ -25,7 +25,9 @@ export default class EventDisplayProvider extends Component{
       {name: 'Event 5',
       date: '2018/12/12',
       description: 'Här gör man det man inte gör annavart'}
-    ]
+    ],
+
+    selectedEvent: {}
 
   }
 
@@ -41,7 +43,8 @@ export default class EventDisplayProvider extends Component{
     return(
       <EventDisplayContext.Provider value= {{
         state: this.state,
-        fetchEvent: (res) => {this.fetchEventInfo().then(res => {this.setState({events:res})})}
+        fetchEvent: (res) => {this.fetchEventInfo().then(res => {this.setState({events:res})})},
+        selectEvent: (res) => {console.log(res)}
       }}>
       {this.props.children}
     </EventDisplayContext.Provider>

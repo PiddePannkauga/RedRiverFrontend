@@ -6,21 +6,18 @@ import Button from './button'
 import DropDown from './dropdown';
 import LoginModal from './modal-login';
 
+
 class SplashScreen extends Component{
 
   constructor(props) {
    super(props);
 
-   this.state = { isOpenLogin: false };
+   this.state = {
+     isOpenLogin: false
+   };
  }
 
- toggleLoginModal = () => {
-   console.log("hej")
-    this.setState({
-      isOpenLogin: !this.state.isOpenLogin
-    });
 
-  }
 
   render(){
     return(
@@ -37,6 +34,16 @@ class SplashScreen extends Component{
   )
 
   }
+
+  toggleLoginModal = () => {
+
+     this.setState({
+       isOpenLogin: !this.state.isOpenLogin
+     });
+
+   }
+
+
 }
 
 export default SplashScreen;

@@ -4,8 +4,9 @@ import EventInfoItem from './eventinfo-item';
 
 const EventInfoList = (props) =>{
   const eventinfoItems = props.events.map((obj)=>{
+
     return(
-      <EventInfoItem key={obj.name} events={obj}/>
+      <EventInfoItem key={obj.name} events={obj} onClick={props.onClick} />
       );
     });
     return(
