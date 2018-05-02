@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import EventInfoList from './eventinfo-list';
-//import '../../styles/eventinfo.css';
+// import '../../styles/eventinfo.css';
 import {EventFinderContext} from '../../providers/provider-eventfinder';
 import EventInfoModal from './modal-eventinfo';
 import RegisterForEventModal from './modal-registerforevent';
@@ -17,8 +17,7 @@ class EventInfoDisplay extends Component{
     };
   }
 
-  render(){
-    let selectedEvent;
+  render(){ 
     return(
       <EventFinderContext.Consumer>
         {(context) => (

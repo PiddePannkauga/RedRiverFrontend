@@ -8,7 +8,7 @@ class SearchBar extends Component{
     return(
       <EventFinderContext.Consumer>
         {(context) => (
-      <input onKeyDown={context.fetchEvent}>
+      <input onKeyDown={context.fetchEvent} >
 
       </input>
     )}
