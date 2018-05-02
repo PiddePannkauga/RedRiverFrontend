@@ -18,7 +18,8 @@ class EventInfoItem extends Component{
             {this.props.events.name}
           </div>
           <div className="Date">
-            {this.props.events.date}
+            {this.props.events.startDateAndTime}
+            {this.props.events.eventEnd}
           </div>
           <div className="Description">
             {this.props.events.description}

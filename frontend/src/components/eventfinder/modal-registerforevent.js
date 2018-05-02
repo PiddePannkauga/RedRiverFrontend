@@ -18,11 +18,20 @@ class RegisterForEventModal extends Component{
       backgroundColor: 'rgba(0,0,0,0.3)',
       padding: 50
     };
+    const modalStyle = {
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    maxWidth: 500,
+    minHeight: 300,
+    margin: '0 auto',
+    padding: 30
+  };
 
     return(
       <div className="backdrop" style={backdropStyle}>
-        <div className="modal-dialog">
+        <div className="modal-dialog" style={modalStyle}>
           <div className="modal-content">
+            <h1>Anmäl Dig</h1>
             <button onClick={this.props.onClose}>
               Close
             </button>

@@ -18,6 +18,15 @@ class EventInfoModal extends Component{
       backgroundColor: 'rgba(0,0,0,0.3)',
       padding: 50
     };
+
+    const modalStyle = {
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    maxWidth: 500,
+    minHeight: 300,
+    margin: '0 auto',
+    padding: 30
+  };
     if(!this.props.show) {
       return null;
     }
@@ -25,7 +34,7 @@ class EventInfoModal extends Component{
 
     return(
     <div className="backdrop" style={backdropStyle}>
-      <div className="modal-dialog" >
+      <div className="modal-dialog" style={modalStyle}>
         <div className="modal-content">
           <button onClick={this.props.onClose}>
             Close
@@ -35,7 +44,9 @@ class EventInfoModal extends Component{
 
           </div>
           <div className="Date">
-            {this.props.events.date}
+            {this.props.events.startDateAndTime}
+
+            {this.props.events.eventStop}
           </div>
           <div className="Description">
             {this.props.events.description}

@@ -1,18 +1,17 @@
 import React,{Component} from 'react';
 import EventInfoList from './eventinfo-list';
 //import '../../styles/eventinfo.css';
-import {EventDisplayContext} from '../../providers/provider-eventdisplay';
+import {EventFinderContext} from '../../providers/provider-eventfinder';
 import EventInfoModal from './modal-eventinfo';
 import RegisterForEventModal from './modal-registerforevent';
+import Axios from 'axios';
 
 class EventInfoDisplay extends Component{
   constructor(props){
     super(props)
 
     this.state = {
-      selectedEvent:{name: 'Event 1',
-      date: '2001/01/01',
-      description: 'Här gör man saker'},
+      selectedEvent:{},
       isOpenEventInfo: false,
       isOpenRegisterForEvent: false
     };
@@ -21,7 +20,7 @@ class EventInfoDisplay extends Component{
   render(){
     let selectedEvent;
     return(
-      <EventDisplayContext.Consumer>
+      <EventFinderContext.Consumer>
         {(context) => (
           <div className="EventInfoDisplay-container">
             <EventInfoList  events={context.state.events} onClick={this.toggleEventInfoModal} />
@@ -29,29 +28,42 @@ class EventInfoDisplay extends Component{
             <RegisterForEventModal show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
           </div>
         )}
-      </EventDisplayContext.Consumer>
+      </EventFinderContext.Consumer>
     )
   }
 
   toggleEventInfoModal = (selectedEvent) => {
-    if(!selectedEvent){
-      this.setState({selectedEvent: selectedEvent});
+    if(!this.state.isOpenEventInfo){
+      this.getSelectedEvent(selectedEvent.id).then(res=>{this.setState({selectedEvent:res})}).then(
+        this.setState({
+
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        }))
+      }else{
+        this.setState({
+
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        })
+      }
+
+
     }
 
-     this.setState({
+    getSelectedEvent(selectedEvent){
 
-       isOpenEventInfo: !this.state.isOpenEventInfo
-     });
+      return Axios.get('http://ellakk.zapto.org:5050/api/Events/'+selectedEvent).then(res =>{
 
-   }
+        return res.data
+      })
+    }
 
-   toggleRegisterForEventModal = () => {
-     if(this.state.isOpenEventInfo){
-       this.setState({
+    toggleRegisterForEventModal = () => {
+      if(this.state.isOpenEventInfo){
+        this.setState({
 
-         isOpenEventInfo: !this.state.isOpenEventInfo
-       });
-     }
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        });
+      }
       this.setState({
 
         isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
@@ -66,11 +78,11 @@ class EventInfoDisplay extends Component{
           isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
         });
       }
-       this.setState({
+      this.setState({
 
-         isOpenEventInfo: !this.state.isOpenEventInfo
-       });
+        isOpenEventInfo: !this.state.isOpenEventInfo
+      });
 
-     }
-}
-export default EventInfoDisplay;
+    }
+  }
+  export default EventInfoDisplay;
