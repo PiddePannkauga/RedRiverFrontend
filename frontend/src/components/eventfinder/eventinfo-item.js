@@ -15,14 +15,14 @@ class EventInfoItem extends Component{
       <div>
         <div className="EventInfoItem" onClick={(e)=>this.props.onClick(event,e)}>
           <div className="Name">
-            {this.props.events.name}
+            {this.props.events.eventTitle}
           </div>
           <div className="Date">
-            {this.props.events.startDateAndTime}
+            {this.props.events.eventStart}
             {this.props.events.eventEnd}
           </div>
           <div className="Description">
-            {this.props.events.description}
+            {this.props.events.eventDescription}
           </div>
         </div>
       </div>

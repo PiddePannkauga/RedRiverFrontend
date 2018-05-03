@@ -3,10 +3,11 @@ import EventInfoItem from './eventinfo-item';
 //import '../../styles/eventinfo.css';
 
 const EventInfoList = (props) =>{
+
   const eventinfoItems = props.events.map((obj)=>{
 
     return(
-      <EventInfoItem key={obj.name} events={obj} onClick={props.onClick} />
+      <EventInfoItem key={obj.eventTitle} events={obj} onClick={props.onClick} />
       );
     });
     return(

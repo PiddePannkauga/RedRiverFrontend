@@ -41,16 +41,16 @@ class EventInfoModal extends Component{
                 Close
               </button>
               <div className="Name">
-                {this.props.events.name}
+                {this.props.events.eventTitle}
 
               </div>
               <div className="Date">
-                {this.props.events.startDateAndTime}
+                {this.props.events.eventStart}
 
                 {this.props.events.eventStop}
               </div>
               <div className="Description">
-                {this.props.events.description}
+                {this.props.events.eventDescription}
               </div>
               <button  onClick={this.props.onRegister}>
                 Anmäla

@@ -6,8 +6,8 @@ class LoginModal extends Component{
   constructor(props){
     super(props)
     this.state = {
-      userName: 'linda.rosing@gmail.com',
-      password: 'Leinigen',
+      userName: '',
+      password: '',
       token: ''
     };
 
@@ -49,7 +49,7 @@ class LoginModal extends Component{
               Username:  <input type="text" onChange={(e)=>{this.setState({userName: e.target.value})}}></input>
               Password:  <input type="password" onChange={(e)=>this.setState({password: e.target.value})}></input>
             </form>
-            <button onClick={()=>this.login().then(res=>this.setState({toke: res}))}>Login</button>
+            <button onClick={()=>this.login().then(res=>this.setState({token: res}))}>Login</button>
           </div>
         </div>
       </div>
@@ -58,11 +58,12 @@ class LoginModal extends Component{
 
   login(){
 
-    return Axios.post('http://ellakk.zapto.org:5050/api/User/login',
-    {
+    return Axios.post('http://ellakk.zapto.org:5050/api/User/login',{
+      
       email: this.state.userName,
       password: this.state.password
-    }).then(function (response) {
+    })
+    .then(function (response) {
 
       return response.data.token
     }).catch(function (error) {
@@ -72,12 +73,11 @@ class LoginModal extends Component{
 }
 
 
-
-LoginModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool,
-  children: PropTypes.node
-};
+// LoginModal.propTypes = {
+//   onClose: PropTypes.func.isRequired,
+//   show: PropTypes.bool,
+//   children: PropTypes.node
+// };
 
 
 
