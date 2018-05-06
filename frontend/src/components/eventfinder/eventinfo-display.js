@@ -23,34 +23,36 @@ class EventInfoDisplay extends Component{
     const eventsToDisplay = this.eventSearch(this.props.searchTerm,this.props.events)
 
 
-  if(JSON.stringify(this.state.eventsToDisplay) !== JSON.stringify(eventsToDisplay)){
-    this.setState({eventsToDisplay})
-  }
-}
-
-compononentWillRecieveProps() {
-  console.log("props  ")
-}
-
-render(){
-  return(
-    <div className="EventInfoDisplay-container">
-      <EventInfoList  events={this.state.eventsToDisplay} onClick={this.toggleEventInfoModal} />
-      <EventInfoModal events={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
-      <RegisterForEventModal show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
-    </div>
-  )
-}
-
-eventSearch(searchTerm,arr){
-  const eventsToDisplay=[];
-  arr.forEach((obj)=>{
-    if(obj.eventTitle === searchTerm){
-      eventsToDisplay.push(obj)
+    if(JSON.stringify(this.state.eventsToDisplay) !== JSON.stringify(eventsToDisplay)){
+      this.setState({eventsToDisplay})
     }
   }
-)
-return eventsToDisplay;
+
+  render(){
+    return(
+      <div className="EventInfoDisplay-container">
+        <EventInfoList  events={this.state.eventsToDisplay} onClick={this.toggleEventInfoModal} />
+        <EventInfoModal events={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
+        <RegisterForEventModal show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
+      </div>
+    )
+  }
+
+  eventSearch(searchTerm,arr){
+    const eventsToDisplay=[];
+    const searchTermRegex = new RegExp(searchTerm, "i");
+
+    arr.forEach((obj)=>{
+      if(searchTermRegex.test(obj.eventTitle)){
+        eventsToDisplay.push(obj)
+      }else{
+        if(searchTermRegex.test(obj.eventDescription)){
+          eventsToDisplay.push(obj)
+        }
+      }
+    }
+  )
+  return eventsToDisplay;
 }
 
 toggleEventInfoModal = (selectedEvent) => {
@@ -62,7 +64,7 @@ toggleEventInfoModal = (selectedEvent) => {
       }))
     }else{
       this.setState({
-
+        selectedEvent: {},
         isOpenEventInfo: !this.state.isOpenEventInfo
       })
     }

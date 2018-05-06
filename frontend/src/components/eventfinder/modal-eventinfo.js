@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
 
+
+
 class EventInfoModal extends Component{
   constructor(props){
     super(props)
-
   }
-
 
   render(){
 
@@ -27,6 +27,7 @@ class EventInfoModal extends Component{
       margin: '0 auto',
       padding: 30
     };
+
     if(!this.props.show) {
       return null;
     }
@@ -42,7 +43,6 @@ class EventInfoModal extends Component{
               </button>
               <div className="Name">
                 {this.props.events.eventTitle}
-
               </div>
               <div className="Date">
                 {this.props.events.eventStart}
@@ -59,13 +59,8 @@ class EventInfoModal extends Component{
 
           </div>
         </div>
-
-
     )
   }
-
-
-
 
 }
 
