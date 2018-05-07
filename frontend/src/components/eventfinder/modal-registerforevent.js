@@ -29,8 +29,10 @@ class RegisterForEventModal extends Component{
 
     return(
       <div className="backdrop" style={backdropStyle}>
+        <div className="container-fluid">
         <div className="modal-dialog" style={modalStyle}>
           <div className="modal-content">
+
             <h1>Anmäl Dig</h1>
             <button onClick={this.props.onClose}>
               Close
@@ -40,12 +42,30 @@ class RegisterForEventModal extends Component{
             </button>
             <div>
               <form>
-                Förnamn:  <input type="text"></input>
-                Efternamn:  <input type="text"></input>
-                Epost:  <input type="text"></input>
-                Adress:  <input type="text"></input>
-                Personnummer:  <input type="text"></input>
-                Telefonnummer:  <input type="text"></input>
+                <div className="form-group">
+                  <label htmlFor="firstname">Förnamn</label>
+                  <input type="text" className="form-control" id="firstname" placeholder="Ange ditt förnamn" name="firstname"></input>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="lastname">Efternamn</label>
+                  <input type="text" className="form-control" id="lastname" placeholder="Ange ditt efternamn" name="lastname"></input>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Epost</label>
+                  <input type="email" className="form-control" id="email" placeholder="Ange din E-post" name="email"></input>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="address">Adress</label>
+                  <input type="address" className="form-control" id="address" placeholder="Ange din Adress" name="address"></input>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="personnr">Personnummer</label>
+                  <input type="text" className="form-control" id="personnr" placeholder="Ange ditt personnummer" name="personnr"></input>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Telefonnummer</label>
+                  <input type="tel" className="form-control" id="phone" placeholder="Ange ditt telefonnummer" name="phone"></input>
+                </div>
               </form>
             </div>
 
@@ -67,7 +87,7 @@ class RegisterForEventModal extends Component{
             </div>
             <button onClick={this.props.onClose}>Skicka in</button>
           </div>
-
+        </div>
         </div>
       </div>
     )
