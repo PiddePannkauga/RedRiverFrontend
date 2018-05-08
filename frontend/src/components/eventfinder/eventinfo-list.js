@@ -6,7 +6,7 @@ const EventInfoList = (props) =>{
   const eventinfoItems = props.events.map((obj)=>{
 
     return(
-      <EventInfoItem key={obj.name} events={obj} onClick={props.onClick} />
+      <EventInfoItem key={obj.eventId} events={obj} onClick={props.onClick} />
       );
     });
     return(

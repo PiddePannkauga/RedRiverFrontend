@@ -24,17 +24,16 @@ class RegisterForEventModal extends Component{
     const modalStyle = {
       backgroundColor: '#fff',
       borderRadius: 5,
-      margin: 'auto',
-      padding: 'auto'
+      margin: '0 auto',
+      padding: '0 auto'
     };
 
     return(
       <div className="backdrop" style={backdropStyle}>
         <div className="modal-dialog modal-lg" style={modalStyle}>
-          <div className="container-fluid">
             <div className="modal-content">
-
-                <div className="row mt-2">
+              <div className="container-fluid">
+                <div className="row mt-3">
                   <div className="col-sm-1">
                     <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
                       <span aria-hidden="true">&lt;</span>
@@ -59,30 +58,37 @@ class RegisterForEventModal extends Component{
                         <label htmlFor="firstname"> Förnamn </label>
                         <input type="text" className="form-control" id="firstname" placeholder="Ange ditt förnamn"/>
                       </div>
+                      <div className="form-group">
+                        <label htmlFor="street"> Adress </label>
+                        <input type="address" className="form-control" id="street" placeholder="Exempelgatan 1"/>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="postal"> Postnummer </label>
+                        <input type="text" className="form-control" id="postal" placeholder="123 45"></input>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="personnr"> Personnummer </label>
+                        <input type="ssn" className="form-control" id="personnr" placeholder="Ange ditt personnummer"></input>
+                      </div>
+                      <div className="form-group">
+                        <button className="btn btn-primary-outline dropdown-toggle" type="button" data-toggle="dropdown" onClick={{}}> Kön
+                          <span className="caret"></span>
+                        </button>
+                      </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="lastname"> Efternamn </label>
                         <input type="text" className="form-control" id="lastname" placeholder="Ange ditt efternamn"></input>
                       </div>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email"> Epost </label>
-                    <input type="email" className="form-control" id="email" placeholder="Ange din E-post"></input>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="address"> Adress </label>
-                    <input type="address" className="form-control" id="address" placeholder="Ange din Adress"/>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6">
                       <div className="form-group">
-                        <label htmlFor="personnr"> Personnummer </label>
-                        <input type="text" className="form-control" id="personnr" placeholder="Ange ditt personnummer"></input>
+                        <label htmlFor="city"> Stad </label>
+                        <input type="address" className="form-control" id="city" placeholder="Ange din stad"/>
                       </div>
-                    </div>
-                    <div className="col-sm-6">
+                      <div className="form-group">
+                        <label htmlFor="email"> Epost </label>
+                        <input type="email" className="form-control" id="email" placeholder="Ange din E-post"></input>
+                      </div>
                       <div className="form-group">
                         <label htmlFor="phone"> Telefonnummer </label>
                         <input type="tel" className="form-control" id="phone" placeholder="Ange ditt telefonnummer"></input>
@@ -90,7 +96,7 @@ class RegisterForEventModal extends Component{
                     </div>
                   </div>
 
-                  <h5> Allergier/Specialkost </h5>
+                  <h5 className="mt-2"> Allergier/Specialkost </h5>
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="vegetarian">
                       <input type="checkbox" className="form-check-input" id="vegetarian"></input> Vegetarisk
@@ -113,13 +119,12 @@ class RegisterForEventModal extends Component{
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="personnr"> Övriga allergier/kost </label>
-                    <input type="text" className="form-control" id="otherAllergies"></input>
+                    <input type="text" className="form-control" id="otherAllergies" placeholder="Övriga allergier/specialkost"></input>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="exampleFormControlTextarea1"> Övrig information </label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" style={{resize: 'none'}}></textarea>
+                    <label htmlFor="otherInfo"><h5 className="mt-2"> Övrig information </h5></label>
+                    <textarea className="form-control" id="otherInfo" rows="3" style={{resize: 'none'}}></textarea>
                   </div>
                 </form>
               </div>

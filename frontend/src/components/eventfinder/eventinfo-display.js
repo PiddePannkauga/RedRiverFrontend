@@ -34,7 +34,7 @@ class EventInfoDisplay extends Component{
 
   toggleEventInfoModal = (selectedEvent) => {
     if(!this.state.isOpenEventInfo){
-      this.getSelectedEvent(selectedEvent.id).then(res=>{this.setState({selectedEvent:res})}).then(
+      this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
         this.setState({
 
           isOpenEventInfo: !this.state.isOpenEventInfo
