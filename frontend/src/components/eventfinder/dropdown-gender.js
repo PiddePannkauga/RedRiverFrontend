@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 
-class DropDown extends Component{
+class DropdownGender extends Component{
 
   constructor(props) {
       super(props);
@@ -20,8 +20,8 @@ class DropDown extends Component{
     const classDropdownMenu = 'dropdown-menu' + (this.state.isToggleOn ? ' show' : '')
     return(
       <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown" onClick={(e) => {this.showDropdown(e)}}>Dropdown
-          <span className="caret"></span>
+        <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" name="gender" onClick={(e) => {this.showDropdown(e)}}>
+          Kön <span className="caret"></span>
         </button>
         <ul className={classDropdownMenu}>
           <li><a href="/">HTML</a></li>
@@ -34,4 +34,4 @@ class DropDown extends Component{
 
 }
 
-export default DropDown;
+export default DropdownGender;

@@ -12,9 +12,17 @@ class SearchBar extends Component{
 
   render(){
     return(
+<<<<<<< HEAD
       <input onChange={e=>this.props.onChange(e.target.value)} >
 
       </input>
+=======
+      <EventFinderContext.Consumer>
+        {(context) => (
+          <input className="w-100" onKeyDown={context.fetchEvent} />
+        )}
+      </EventFinderContext.Consumer>
+>>>>>>> nils-branch
     )
   }
 }

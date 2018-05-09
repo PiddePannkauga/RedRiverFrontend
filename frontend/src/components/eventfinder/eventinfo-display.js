@@ -38,9 +38,16 @@ class EventInfoDisplay extends Component{
     )
   }
 
+<<<<<<< HEAD
   eventSearch(searchTerm,arr){
     const eventsToDisplay=[];
     const searchTermRegex = new RegExp(searchTerm, "i");
+=======
+  toggleEventInfoModal = (selectedEvent) => {
+    if(!this.state.isOpenEventInfo){
+      this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
+        this.setState({
+>>>>>>> nils-branch
 
     arr.forEach((obj)=>{
       if(searchTermRegex.test(obj.eventTitle)){

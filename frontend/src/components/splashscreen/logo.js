@@ -6,7 +6,7 @@ class Logo extends Component{
 
   render(){
     return(
-      <img className="logo" src={image} alt="Placeholder"></img>
+      <img className="img-fluid" src={image} alt="Placeholder"></img>
     )
   }
 
