@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import DropdownGender from './dropdown-gender';
 
 class RegisterForEventModal extends Component{
   constructor(props){
@@ -18,7 +19,7 @@ class RegisterForEventModal extends Component{
       right: 0,
       backgroundColor: 'rgba(0,0,0,0.3)',
       padding: 50,
-      'overflow-y': 'auto'
+      overflowY: 'auto'
     };
 
     const modalStyle = {
@@ -33,20 +34,21 @@ class RegisterForEventModal extends Component{
         <div className="modal-dialog modal-lg" style={modalStyle}>
             <div className="modal-content">
               <div className="container-fluid">
-                <div className="row mt-3">
-                  <div className="col-sm-1">
+                <div className="modal-header">
+
                     <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
                       <span aria-hidden="true">&lt;</span>
                     </button>
-                  </div>
-                  <div className="col-sm-10">
-                    <h2 className="text-center"> Anmäl Dig </h2>
-                  </div>
-                  <div className="col-sm-1">
-                    <button type="button" className="close mr-3" aria-label="Close" onClick={this.props.onClose}>
+
+
+                    <h2 className="modal-title"> Anmäl Dig </h2>
+
+
+                    <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
                       <span aria-hidden="true">&times;</span>
                     </button>
-                  </div>
+
+
                 </div>
 
               <div className="modal-body">
@@ -58,41 +60,57 @@ class RegisterForEventModal extends Component{
                         <label htmlFor="firstname"> Förnamn </label>
                         <input type="text" className="form-control" id="firstname" placeholder="Ange ditt förnamn"/>
                       </div>
-                      <div className="form-group">
-                        <label htmlFor="street"> Adress </label>
-                        <input type="address" className="form-control" id="street" placeholder="Exempelgatan 1"/>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="postal"> Postnummer </label>
-                        <input type="text" className="form-control" id="postal" placeholder="123 45"></input>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="personnr"> Personnummer </label>
-                        <input type="ssn" className="form-control" id="personnr" placeholder="Ange ditt personnummer"></input>
-                      </div>
-                      <div className="form-group">
-                        <button className="btn btn-primary-outline dropdown-toggle" type="button" data-toggle="dropdown" onClick={{}}> Kön
-                          <span className="caret"></span>
-                        </button>
-                      </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="lastname"> Efternamn </label>
                         <input type="text" className="form-control" id="lastname" placeholder="Ange ditt efternamn"></input>
                       </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="street"> Adress </label>
+                    <input type="address" className="form-control" id="street" placeholder="Exempelgatan 1"/>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="city"> Stad </label>
-                        <input type="address" className="form-control" id="city" placeholder="Ange din stad"/>
+                        <input type="text" className="form-control" id="city" placeholder="Ange din stad"/>
                       </div>
+                    </div>
+                    <div className="col-sm-6">
+                      <div className="form-group">
+                        <label htmlFor="postal"> Postnummer </label>
+                        <input type="number" className="form-control" id="postal" placeholder="123 45"></input>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="email"> Epost </label>
                         <input type="email" className="form-control" id="email" placeholder="Ange din E-post"></input>
                       </div>
+                    </div>
+                    <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="phone"> Telefonnummer </label>
                         <input type="tel" className="form-control" id="phone" placeholder="Ange ditt telefonnummer"></input>
                       </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <div className="form-group">
+                        <label htmlFor="personnr"> Personnummer </label>
+                        <input type="number" className="form-control" id="personnr" placeholder="Ange ditt personnummer"></input>
+                      </div>
+                    </div>
+                    <div className="col-sm-6">
+                      <DropdownGender />
                     </div>
                   </div>
 
