@@ -36,10 +36,10 @@ class SplashScreen extends Component{
           </div>
           <div className="col-sm-2" align="right">
             <div>
-              <button type="button" className="btn btn-outline-primary btn-block mb-2" onClick={this.toggleLoginModal}>Logga in</button>
+              <button type="button" className="btn btn-outline-primary mb-2" style={{minWidth: 100}} onClick={this.toggleLoginModal}>Logga in</button>
             </div>
             <div>
-              <button type="button" className="btn btn-outline-primary btn-block mb-2">Registrera</button>
+              <button type="button" className="btn btn-outline-primary mb-2" style={{minWidth: 100}}>Registrera</button>
             </div>
           </div>
 

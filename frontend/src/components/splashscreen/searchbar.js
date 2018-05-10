@@ -8,7 +8,7 @@ class SearchBar extends Component{
     return(
       <EventFinderContext.Consumer>
         {(context) => (
-          <input className="w-100" onKeyDown={context.fetchEvent} />
+          <input className="form-control form-rounded" type="text" placeholder="Sök event" style={{borderRadius: '1rem'}} onKeyDown={context.fetchEvent} />
         )}
       </EventFinderContext.Consumer>
     )

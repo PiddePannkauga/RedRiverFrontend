@@ -110,7 +110,10 @@ class RegisterForEventModal extends Component{
                       </div>
                     </div>
                     <div className="col-sm-6">
-                      <DropdownGender />
+                      <div className="form-group">
+                        <label htmlFor="gender"> Kön </label>
+                        <DropdownGender />
+                      </div>
                     </div>
                   </div>
 

@@ -21,7 +21,7 @@ class DropdownGender extends Component{
     return(
       <div className="dropdown">
         <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" name="gender" onClick={(e) => {this.showDropdown(e)}}>
-          Kön <span className="caret"></span>
+          Välj kön <span className="caret"></span>
         </button>
         <ul className={classDropdownMenu}>
           <li><a href="/">HTML</a></li>
