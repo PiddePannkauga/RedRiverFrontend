@@ -32,22 +32,15 @@ class EventInfoDisplay extends Component{
     return(
       <div className="EventInfoDisplay-container">
         <EventInfoList  events={this.state.eventsToDisplay} onClick={this.toggleEventInfoModal} />
-        <EventInfoModal events={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
-        <RegisterForEventModal show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
+        <EventInfoModal event={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
+        <RegisterForEventModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
       </div>
     )
   }
 
-<<<<<<< HEAD
   eventSearch(searchTerm,arr){
     const eventsToDisplay=[];
     const searchTermRegex = new RegExp(searchTerm, "i");
-=======
-  toggleEventInfoModal = (selectedEvent) => {
-    if(!this.state.isOpenEventInfo){
-      this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
-        this.setState({
->>>>>>> nils-branch
 
     arr.forEach((obj)=>{
       if(searchTermRegex.test(obj.eventTitle)){
@@ -62,57 +55,55 @@ class EventInfoDisplay extends Component{
   return eventsToDisplay;
 }
 
-toggleEventInfoModal = (selectedEvent) => {
-  if(!this.state.isOpenEventInfo){
-    this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
-      this.setState({
+getSelectedEvent(selectedEvent){
 
-        isOpenEventInfo: !this.state.isOpenEventInfo
-      }))
-    }else{
-      this.setState({
-        selectedEvent: {},
-        isOpenEventInfo: !this.state.isOpenEventInfo
-      })
-    }
-
-
-  }
-
-  getSelectedEvent(selectedEvent){
-
-    return Axios.get('http://ellakk.zapto.org:5050/api/Events/'+selectedEvent).then(res =>{
-
+  return Axios.get('http://ellakk.zapto.org:5050/api/Events/'+selectedEvent).then(res =>
+    {
       return res.data
     })
   }
 
-  toggleRegisterForEventModal = () => {
-    if(this.state.isOpenEventInfo){
-      this.setState({
+  toggleEventInfoModal = (selectedEvent) => {
+    if(!this.state.isOpenEventInfo){
+      this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
+        this.setState({
 
-        isOpenEventInfo: !this.state.isOpenEventInfo
-      });
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        }))
+      }else{
+        this.setState({
+          selectedEvent: {},
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        })
+      }
     }
-    this.setState({
 
-      isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
-    });
+    toggleRegisterForEventModal = () => {
+      if(this.state.isOpenEventInfo){
+        this.setState({
 
-  }
-
-  returnToEventInfo = () => {
-    if(this.state.isOpenRegisterForEvent){
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        });
+      }
       this.setState({
 
         isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
       });
+
     }
-    this.setState({
 
-      isOpenEventInfo: !this.state.isOpenEventInfo
-    });
+    returnToEventInfo = () => {
+      if(this.state.isOpenRegisterForEvent){
+        this.setState({
 
+          isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
+        });
+      }
+      this.setState({
+
+        isOpenEventInfo: !this.state.isOpenEventInfo
+      });
+
+    }
   }
-}
-export default EventInfoDisplay;
+  export default EventInfoDisplay;

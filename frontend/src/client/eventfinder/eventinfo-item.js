@@ -11,7 +11,7 @@ class EventInfoItem extends Component{
 
     const event = this.props.events
 
-    return(
+    return( 
       <div>
         <div className="EventInfoItem" onClick={(e)=>this.props.onClick(event,e)}>
           <div className="Name">

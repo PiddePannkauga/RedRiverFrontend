@@ -50,24 +50,24 @@ class RegisterForEventModal extends Component{
     return(
       <div className="backdrop" style={backdropStyle}>
         <div className="modal-dialog modal-lg" style={modalStyle}>
-            <div className="modal-content">
-              <div className="container-fluid">
-                <div className="modal-header">
+          <div className="modal-content">
+            <div className="container-fluid">
+              <div className="modal-header">
 
-                    <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
-                      <span aria-hidden="true">&lt;</span>
-                    </button>
-
-
-                    <h2 className="modal-title"> Anmäl Dig </h2>
+                <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
+                  <span aria-hidden="true">&lt;</span>
+                </button>
 
 
-                    <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                <h2 className="modal-title"> Anmäl Dig </h2>
 
 
-                </div>
+                <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+
+              </div>
 
               <div className="modal-body">
                 <form>
@@ -76,52 +76,33 @@ class RegisterForEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="firstname"> Förnamn </label>
-                        <input type="text" className="form-control" name="firstname" value={this.state.firstName} onChange={this.handleTextChange} placeholder="Ange ditt förnamn"/>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="street"> Adress </label>
-                        <input type="address" className="form-control" name="street" onChange={this.handleTextChange} placeholder="Exempelgatan 1"/>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="postal"> Postnummer </label>
-                        <input type="text" className="form-control" name="postal" placeholder="123 45"></input>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="personnr"> Personnummer </label>
-                        <input type="ssn" className="form-control" name="ssn" placeholder="Ange ditt personnummer"></input>
-                      </div>
-                      <div className="form-group">
-                        <button className="btn btn-primary-outline dropdown-toggle" type="button" data-toggle="dropdown" onClick={{}}> Kön
-                          <span className="caret"></span>
-                        </button>
-                        <input type="text" className="form-control" id="firstname" placeholder="Ange ditt förnamn"/>
+                        <input type="text" className="form-control" id="firstname" value={this.state.firstName} onChange={this.handleTextChange} placeholder="Ange ditt förnamn"/>
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="lastname"> Efternamn </label>
-
-                        <input type="text" className="form-control" id="lastname" placeholder="Ange ditt efternamn"></input>
+                        <input type="text" className="form-control" id="lastname"value={this.state.lastname} onChange={this.handleTextChange} placeholder="Ange ditt efternamn"></input>
                       </div>
                     </div>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="street"> Adress </label>
-                    <input type="address" className="form-control" id="street" placeholder="Exempelgatan 1"/>
+                    <input type="address" className="form-control" id="street" value={this.state.street} onChange={this.handleTextChange}placeholder="Exempelgatan 1"/>
                   </div>
 
                   <div className="row">
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="city"> Stad </label>
-                        <input type="text" className="form-control" id="city" placeholder="Ange din stad"/>
+                        <input type="text" className="form-control" id="city" value={this.state.city} onChange={this.handleTextChange} placeholder="Ange din stad"/>
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="postal"> Postnummer </label>
-                        <input type="number" className="form-control" id="postal" placeholder="123 45"></input>
+                        <input type="number" className="form-control" id="postal"  value={this.state.postal} onChange={this.handleTextChange}placeholder="123 45"></input>
                       </div>
                     </div>
                   </div>
@@ -129,13 +110,13 @@ class RegisterForEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="email"> Epost </label>
-                        <input type="email" className="form-control" id="email" placeholder="Ange din E-post"></input>
+                        <input type="email" className="form-control" id="email" value={this.state.email} onChange={this.handleTextChange} placeholder="Ange din E-post"></input>
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="phone"> Telefonnummer </label>
-                        <input type="tel" className="form-control" id="phone" placeholder="Ange ditt telefonnummer"></input>
+                        <input type="tel" className="form-control" id="phone" value={this.state.phone} onChange={this.handleTextChange} placeholder="Ange ditt telefonnummer"></input>
                       </div>
                     </div>
                   </div>
@@ -143,34 +124,32 @@ class RegisterForEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="personnr"> Personnummer </label>
-                        <input type="number" className="form-control" id="personnr" placeholder="Ange ditt personnummer"></input>
+                        <input type="number" className="form-control" id="ssn" value={this.state.ssn} onChange={this.handleTextChange} placeholder="Ange ditt personnummer"></input>
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <DropdownGender />
                     </div>
                   </div>
->>>>>>> nils-branch
 
                   <h5 className="mt-2"> Allergier/Specialkost </h5>
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="vegetarian">
-                      <input type="checkbox" className="form-check-input" name="vegetarian" onClick></input> Vegetarisk
+                      <input type="checkbox" className="form-check-input" id="vegetarian" value={this.state.vegetarian} onChange={this.handleCheckboxChange}></input> Vegetarisk
                     </label>
                   </div>
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="vegan">
-                      <input type="checkbox" className="form-check-input" name="vegan"></input> Vegan
+                      <input type="checkbox" className="form-check-input" id="vegan" value={this.state.vegan} onChange={this.handleCheckboxChange}></input> Vegan
                     </label>
                   </div>
-
                   <div className="form-group">
-                    <input type="text" className="form-control" name="otherAllergies" placeholder="Ange övriga allergier/specialkost"></input>
+                    <input type="text" className="form-control" id="otherAllergies" value={this.state.otherAllergies} onChange={this.handleTextChange}placeholder="Ange övriga allergier/specialkost"></input>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="otherInfo"><h5 className="mt-2"> Övrig information </h5></label>
-                    <textarea className="form-control" id="otherInfo" rows="3" style={{resize: 'none'}}></textarea>
+                    <textarea className="form-control" id="otherInfo" value={this.state.otherInfo} onChange={this.handleTextChange} rows="3" style={{resize: 'none'}}></textarea>
                   </div>
                 </form>
               </div>
@@ -218,13 +197,21 @@ class RegisterForEventModal extends Component{
 }
 
 handleTextChange=(event) => {
-  const name = event.target.name;
+  const name = event.target.id;
   const value = event.target.value;
-
+  console.log(event.target.value)
   this.setState({
     [name]: value
   });
 
+}
+
+handleCheckboxChange=(event)=>{
+  const name = event.target.id;
+  const value = !event.target.checked;
+  this.setState({
+    [name]: value
+  });
 }
 
 }

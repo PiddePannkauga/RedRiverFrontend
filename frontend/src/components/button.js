@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LoginModal from './modal-login';
+
 
 class Button extends Component{
   constructor(props){

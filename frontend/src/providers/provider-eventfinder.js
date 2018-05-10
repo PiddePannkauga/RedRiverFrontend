@@ -15,12 +15,12 @@ export default class EventFinderProvider extends Component{
 
   componentDidMount(){
 
-    const cachedEvents=localStorage.getItem('Events');
-    if(!cachedEvents){
+    // const cachedEvents=localStorage.getItem('Events');
+    // if(!cachedEvents){
       this.fetchEventInfo().then(res => {this.setState({events:res})})
-    }else{
-      this.setState({events: JSON.parse(cachedEvents)})
-    }
+    // }else{
+    //   this.setState({events: JSON.parse(cachedEvents)})
+    // }
   }
 
   fetchEventInfo(){

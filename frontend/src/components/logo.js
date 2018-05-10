@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import image from '../../img/eventsystemlogga_placeholder.png'
-import '../../styles/logo.css';
+import image from '../img/eventsystemlogga_placeholder.png'
+
 
 class Logo extends Component{
 
