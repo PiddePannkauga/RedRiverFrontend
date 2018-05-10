@@ -9,24 +9,35 @@ export default class EventFinderProvider extends Component{
 
   state = {
 
-    events: []
-
+    eventsPublic: [],
+    eventsUser:  []
   }
 
   componentDidMount(){
 
     // const cachedEvents=localStorage.getItem('Events');
     // if(!cachedEvents){
-      this.fetchEventInfo().then(res => {this.setState({events:res})})
+      this.fetchEventInfoPublic().then(res => {this.setState({eventsPublic:res})})
+
     // }else{
     //   this.setState({events: JSON.parse(cachedEvents)})
     // }
   }
 
-  fetchEventInfo(){
+  fetchEventInfoPublic(){
 
     return Axios.get('http://ellakk.zapto.org:5050/api/Events').then(res => {
-      localStorage.setItem('Events' , JSON.stringify(res.data));
+      localStorage.setItem('EventsPublic' , JSON.stringify(res.data));
+      return res.data
+    })
+  }
+
+  fetchEventInfoUser(){
+    return Axios.get('http://ellakk.zapto.org:5050/api/User/events',{
+      params: { userToken: sessionStorage.getItem('userToken') }
+
+    }).then(res => {
+      localStorage.setItem('EventsUser' , JSON.stringify(res.data));
       return res.data
     })
   }
@@ -36,7 +47,8 @@ export default class EventFinderProvider extends Component{
     return(
       <EventFinderContext.Provider value= {{
         state: this.state,
-        fetchEvent: (res) => {this.fetchEventInfo().then(res => {this.setState({events:res})})},
+        fetchEvent: (res) => {this.fetchEventInfoPublic().then(res => {this.setState({events:res})})},
+        fetchEventUser: (res)=>{this.fetchEventInfoUser().then(res => {this.setState({eventsUser:res})})},
       }}>
       {this.props.children}
     </EventFinderContext.Provider>

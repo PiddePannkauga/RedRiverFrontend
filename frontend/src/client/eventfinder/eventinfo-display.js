@@ -1,10 +1,6 @@
 import React,{Component} from 'react';
 import EventInfoList from './eventinfo-list';
 // import '../../styles/eventinfo.css';
-import {EventFinderContext} from '../../providers/provider-eventfinder';
-import EventInfoModal from './modal-eventinfo';
-import RegisterForEventModal from './modal-registerforevent';
-import Axios from 'axios';
 
 
 class EventInfoDisplay extends Component{
@@ -13,9 +9,6 @@ class EventInfoDisplay extends Component{
 
     this.state = {
       eventsToDisplay: [],
-      selectedEvent:{},
-      isOpenEventInfo: false,
-      isOpenRegisterForEvent: false
     };
   }
 
@@ -31,9 +24,7 @@ class EventInfoDisplay extends Component{
   render(){
     return(
       <div className="EventInfoDisplay-container">
-        <EventInfoList  events={this.state.eventsToDisplay} onClick={this.toggleEventInfoModal} />
-        <EventInfoModal event={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
-        <RegisterForEventModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
+        <EventInfoList  events={this.state.eventsToDisplay} onClick={this.props.onClick} />
       </div>
     )
   }
@@ -53,57 +44,7 @@ class EventInfoDisplay extends Component{
     }
   )
   return eventsToDisplay;
+  }
+
 }
-
-getSelectedEvent(selectedEvent){
-
-  return Axios.get('http://ellakk.zapto.org:5050/api/Events/'+selectedEvent).then(res =>
-    {
-      return res.data
-    })
-  }
-
-  toggleEventInfoModal = (selectedEvent) => {
-    if(!this.state.isOpenEventInfo){
-      this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
-        this.setState({
-
-          isOpenEventInfo: !this.state.isOpenEventInfo
-        }))
-      }else{
-        this.setState({
-          selectedEvent: {},
-          isOpenEventInfo: !this.state.isOpenEventInfo
-        })
-      }
-    }
-
-    toggleRegisterForEventModal = () => {
-      if(this.state.isOpenEventInfo){
-        this.setState({
-
-          isOpenEventInfo: !this.state.isOpenEventInfo
-        });
-      }
-      this.setState({
-
-        isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
-      });
-
-    }
-
-    returnToEventInfo = () => {
-      if(this.state.isOpenRegisterForEvent){
-        this.setState({
-
-          isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
-        });
-      }
-      this.setState({
-
-        isOpenEventInfo: !this.state.isOpenEventInfo
-      });
-
-    }
-  }
   export default EventInfoDisplay;

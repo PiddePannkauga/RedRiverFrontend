@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {EventFinderContext} from '../providers/provider-eventfinder';
-
 
 class SearchBar extends Component{
   constructor(props){

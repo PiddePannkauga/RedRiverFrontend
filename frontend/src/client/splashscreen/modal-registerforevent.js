@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Axios from 'axios';
-import DropdownGender from './dropdown-gender';
+
 
 
 class RegisterForEventModal extends Component{
@@ -128,7 +128,12 @@ class RegisterForEventModal extends Component{
                       </div>
                     </div>
                     <div className="col-sm-6">
-                      <DropdownGender />
+                      Ange Kön:&nbsp; &nbsp;
+                      <select id="gender" value={this.state.gender} onChange={this.handleTextChange}>
+                        <option value="male">Man</option>
+                        <option value="female">Kvinna</option>
+                        <option value="other">Annat</option>
+                      </select>
                     </div>
                   </div>
 

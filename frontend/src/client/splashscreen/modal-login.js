@@ -70,6 +70,7 @@ class LoginModal extends Component{
       userPassword: this.state.password
     })
     .then(function (response) {
+      sessionStorage.setItem('userToken',response.data.userToken);
       return response.data.userToken
     }).catch(function (error) {
       console.log(error);

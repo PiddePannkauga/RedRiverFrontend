@@ -5,7 +5,10 @@ import SearchBar from '../../components/searchbar';
 import Button from '../../components/button'
 import DropDown from '../../components/dropdown';
 import LoginModal from './modal-login';
+import EventInfoModal from './modal-eventinfo';
+import RegisterForEventModal from './modal-registerforevent';
 import {EventFinderContext} from '../../providers/provider-eventfinder';
+import Axios from 'axios';
 
 
 class SplashScreen extends Component{
@@ -15,7 +18,10 @@ class SplashScreen extends Component{
 
     this.state = {
       searchTerm: '',
-      isOpenLogin: false
+      isOpenLogin: false,
+      selectedEvent:{},
+      isOpenEventInfo: false,
+      isOpenRegisterForEvent: false
     };
   }
 
@@ -30,7 +36,6 @@ class SplashScreen extends Component{
       <div className="container">
         <div className="row" style={headerStyle} id="header">
           <div className="col-sm-2" align="left">
-            <DropDown />
           </div>
           <div className="col-sm-8">
             <Logo align="center" />
@@ -49,9 +54,11 @@ class SplashScreen extends Component{
             <SearchBar onChange={this.searchTermChange}/>
             <EventFinderContext.Consumer>
               {(context) => (
-                <EventInfoDisplay events={context.state.events} searchTerm={this.state.searchTerm} />
+                <EventInfoDisplay events={context.state.eventsPublic} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoModal}/>
               )}
             </EventFinderContext.Consumer>
+            <EventInfoModal event={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
+            <RegisterForEventModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
             <LoginModal show={this.state.isOpenLogin}  onClose={this.toggleLoginModal} />
           </div>
           <div className="col-sm-2"></div>
@@ -69,6 +76,56 @@ class SplashScreen extends Component{
       isOpenLogin: !this.state.isOpenLogin
     });
   }
+
+  toggleEventInfoModal = (selectedEvent) => {
+    if(!this.state.isOpenEventInfo){
+      this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
+        this.setState({
+
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        }))
+      }else{
+        this.setState({
+          selectedEvent: {},
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        })
+      }
+    }
+
+    toggleRegisterForEventModal = () => {
+      if(this.state.isOpenEventInfo){
+        this.setState({
+
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        });
+      }
+      this.setState({
+
+        isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
+      });
+
+    }
+
+    returnToEventInfo = () => {
+      if(this.state.isOpenRegisterForEvent){
+        this.setState({
+
+          isOpenRegisterForEvent: !this.state.isOpenRegisterForEvent
+        });
+      }
+      this.setState({
+
+        isOpenEventInfo: !this.state.isOpenEventInfo
+      });
+
+    }
+    getSelectedEvent(selectedEvent){
+
+      return Axios.get('http://ellakk.zapto.org:5050/api/Events/'+selectedEvent).then(res =>
+        {
+          return res.data
+        })
+      }
 }
 
 export default SplashScreen;
