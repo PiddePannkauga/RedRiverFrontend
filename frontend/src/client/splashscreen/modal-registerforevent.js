@@ -53,22 +53,20 @@ class RegisterForEventModal extends Component{
           <div className="modal-content">
             <div className="container-fluid">
               <div className="modal-header">
-
-                <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
-                  <span aria-hidden="true">&lt;</span>
-                </button>
-
-
-                <h2 className="modal-title"> Anmäl Dig </h2>
-
-
-                <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-
-
+                <div>
+                  <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
+                    <span aria-hidden="true">&lt;</span>
+                  </button>
+                </div>
+                <div>
+                  <h2 className="modal-title"> Anmäl Dig </h2>
+                </div>
+                <div>
+                  <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
               </div>
-
               <div className="modal-body">
                 <form>
                   <h5> Personliga uppgifter </h5>
@@ -128,12 +126,16 @@ class RegisterForEventModal extends Component{
                       </div>
                     </div>
                     <div className="col-sm-6">
-                      Ange Kön:&nbsp; &nbsp;
-                      <select id="gender" value={this.state.gender} onChange={this.handleTextChange}>
+                      <div className="form-group">
+                        <label htmlFor="gender"> Kön <br/>
+
+                      <select className="mt-2" id="gender" value={this.state.gender} onChange={this.handleTextChange}>
                         <option value="male">Man</option>
                         <option value="female">Kvinna</option>
                         <option value="other">Annat</option>
                       </select>
+                      </label>
+                    </div>
                     </div>
                   </div>
 
