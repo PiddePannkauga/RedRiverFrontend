@@ -8,6 +8,11 @@ class EventInfoModal extends Component{
 
 
   render(){
+    if(!this.props.show) {
+      return null;
+    }
+
+    const event = this.props.event
 
     const backdropStyle = {
       position: 'fixed',
@@ -17,20 +22,15 @@ class EventInfoModal extends Component{
       right: 0,
       backgroundColor: 'rgba(0,0,0,0.3)',
       padding: 50,
-      overflowY: 'auto'
+
     };
 
-      const modalStyle = {
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        margin: '0 auto',
-        padding: '0 auto'
-      };
-
-    if(!this.props.show) {
-      return null;
-    }
-
+    const modalStyle = {
+      backgroundColor: '#fff',
+      borderRadius: 5,
+      margin: '0 auto',
+      padding: '0 auto',
+    };
 
     return(
     <div className="backdrop" style={backdropStyle}>
@@ -38,7 +38,7 @@ class EventInfoModal extends Component{
         <div className="modal-content">
           <div className="modal-header">
             <h2 className="modal-title">
-              {this.props.event.eventTitle}
+              {event.eventTitle}
             </h2>
             <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
               <span aria-hidden="true">&times;</span>
@@ -46,21 +46,20 @@ class EventInfoModal extends Component{
           </div>
           <div className="modal-body">
             <div className="Date">
-              {this.props.event.eventStart}
-              &nbsp; - &nbsp;
-              {this.props.event.eventEnd}
+              {event.eventStart}&nbsp;-&nbsp;
+              {event.eventEnd}
             </div>
             <div className="Location">
-              {this.props.event.eventAdressStreet}
-              , &nbsp;
-              {this.props.event.eventAdressCity}
+              {event.eventAdressStreet}
+              ,&nbsp;
+              {event.eventAdressCity}
             </div>
             <div className="Contact">
-              {this.props.event.eventContactEmail}
+              {event.eventContactEmail}
             </div>
             <div className="Description mt-3">
               <h5>Beskrivning</h5>
-              {this.props.event.eventDescription}
+              {event.eventDescription}
             </div>
           </div>
           <div className="modal-footer">
@@ -71,6 +70,11 @@ class EventInfoModal extends Component{
     </div>
 
     )
+  }
+
+  getMonth(event) {
+    const months = ["Invalid", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+    return months[parseInt(event.slice(5,7))];
   }
 }
 

@@ -5,6 +5,7 @@ import SearchBar from '../../components/searchbar';
 import Button from '../../components/button'
 import DropDown from '../../components/dropdown';
 import LoginModal from './modal-login';
+import RegisterAccountModal from './modal-registerAccount';
 import EventInfoModal from './modal-eventinfo';
 import RegisterForEventModal from './modal-registerforevent';
 import {EventFinderContext} from '../../providers/provider-eventfinder';
@@ -27,30 +28,36 @@ class SplashScreen extends Component{
 
   render(){
 
+    const containerStyle = {
+      
+      minHeight: '100vh',
+      minWidth: '100vw'
+    }
+
     const headerStyle = {
       padding: 20,
       margin: '0 auto',
     };
 
     return(
-      <div className="container">
+      <div className="container" style={containerStyle}>
         <div className="row" style={headerStyle} id="header">
-          <div className="col-sm-2" align="left">
+          <div className="col-sm-3" align="right">
           </div>
-          <div className="col-sm-8">
-            <Logo align="center" />
+          <div className="col-sm-6">
+            <Logo />
           </div>
-          <div className="col-sm-2" align="right">
+          <div className="col-sm-3" align="left">
             <div>
-              <button type="button" className="btn btn-outline-primary btn-block mb-2" onClick={this.toggleLoginModal}>Logga in</button>
+              <button type="button" className="btn btn-primary mb-2" style={{minWidth: 100}} onClick={this.toggleLoginModal}>Logga in</button>
             </div>
             <div>
-              <button type="button" className="btn btn-outline-primary btn-block mb-2">Registrera</button>
+              <button type="button" className="btn btn-primary mb-2" style={{minWidth: 100}}>Registrera</button>
             </div>
           </div>
 
-          <div className="col-sm-2"></div>
-          <div className="col-sm-8">
+          <div className="col-sm-3"></div>
+          <div className="col-sm-6">
             <SearchBar onChange={this.searchTermChange}/>
             <EventFinderContext.Consumer>
               {(context) => (
@@ -60,8 +67,9 @@ class SplashScreen extends Component{
             <EventInfoModal event={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
             <RegisterForEventModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
             <LoginModal show={this.state.isOpenLogin}  onClose={this.toggleLoginModal} />
+            <RegisterAccountModal />
           </div>
-          <div className="col-sm-2"></div>
+          <div className="col-sm-3"></div>
         </div>
       </div>
     )

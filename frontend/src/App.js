@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <EventProvider>
-        <div className="App">
+        <div className="App" style={{overflowX: 'hidden'}}>
           <Switch>
           <Route path="/public" component={SplashScreen} />
           <Route path="/user" component={UserPage}/>

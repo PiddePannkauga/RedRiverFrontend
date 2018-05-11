@@ -8,8 +8,7 @@ class SearchBar extends Component{
 
   render(){
     return(
-      <input onChange={e=>this.props.onChange(e.target.value)}>
-      </input>
+      <input className="form-control form-rounded mt-2 mb-2" type="text" placeholder="Sök event" style={{borderRadius: '1rem'}} onChange={e=>this.props.onChange(e.target.value)} />    
     )
   }
 }

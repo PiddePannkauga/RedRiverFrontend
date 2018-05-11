@@ -6,7 +6,9 @@ class Logo extends Component{
 
   render(){
     return(
-      <img className="img-fluid" src={image} alt="Placeholder"></img>
+      <div className="text-center">
+        <img className="img-fluid" style={{minHeight: 150, maxHeight: '15vh', padding: 20}} src={image} alt="Placeholder"></img>
+      </div>
     )
   }
 

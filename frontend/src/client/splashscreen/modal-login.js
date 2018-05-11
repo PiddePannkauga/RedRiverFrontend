@@ -29,59 +29,48 @@ class LoginModal extends Component{
       left: 0,
       right: 0,
       backgroundColor: 'rgba(0,0,0,0.3)',
-      padding: 50
+      padding: 50,
+      overflowY: 'auto'
     };
+
     const modalStyle = {
       backgroundColor: '#fff',
       borderRadius: 5,
-      maxWidth: 500,
-      minHeight: 300,
       margin: '0 auto',
-      padding: 30
+      padding: '0 auto'
     };
-
-    if(this.state.isLoggedIn){
-      return <Redirect to="/user"/>
-    }
 
     return (
       <div className="backdrop" style={backdropStyle}>
 
-        <div className="modal-dialog" style={modalStyle} >
+        <div className="modal-dialog modal-md" style={modalStyle} >
           <div className="modal-content">
-            <button onClick={this.props.onClose}>
-              Close
-            </button>
-            <form>
-              Username:  <input type="text" onChange={(e)=>{this.setState({userName: e.target.value})}}></input>
-              Password:  <input type="password" onChange={(e)=>this.setState({password: e.target.value})}></input>
-            </form>
-            <button onClick={()=>this.login().then(res=>this.setState({token: res})).then(this.redirect)}>Login</button>
+            <div className="container-fluid">
+              <div className="modal-header">
+                <h2 className="modal-title">
+                  Logga in
+                </h2>
+                <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <input type="text" className="form-control mt-3 mb-3" id="user" placeholder="Användarnamn"/>
+                  <input type="password" className="form-control mt-3 mb-3" id="password" placeholder="Lösenord"/>
+                </form>
+
+                <div className="text-center"><button className="btn btn-primary" onClick={this.props.onRegister}> Logga in </button></div>
+              </div>
+              <div className="modal-footer">
+                <p>Ej medlem? <a href="">Registrera konto</a></p>
+                <p>Glömt <a href="">Lösenord?</a></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     );
-  }
-
-  login(){
-
-    return Axios.post('http://ellakk.zapto.org:5050/api/User/login',{
-      userEmail: this.state.userName,
-      userPassword: this.state.password
-    })
-    .then(function (response) {
-      sessionStorage.setItem('userToken',response.data.userToken);
-      return response.data.userToken
-    }).catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  redirect= () =>{
-    const token = this.state.token
-    if(token){
-      this.setState({isLoggedIn:true})
-    }
   }
 
 }

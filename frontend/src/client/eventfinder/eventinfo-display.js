@@ -23,8 +23,8 @@ class EventInfoDisplay extends Component{
 
   render(){
     return(
-      <div className="EventInfoDisplay-container">
-        <EventInfoList  events={this.state.eventsToDisplay} onClick={this.props.onClick} />
+      <div className="container" style={{padding: 0}}>
+        <EventInfoList events={this.state.eventsToDisplay} onClick={this.props.onClick} />
       </div>
     )
   }
