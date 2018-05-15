@@ -32,6 +32,10 @@ class EventInfoModal extends Component{
       padding: '0 auto',
     };
 
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
+
     return(
     <div className="backdrop" style={backdropStyle}>
       <div className="modal-dialog modal-lg" style={modalStyle}>
@@ -40,7 +44,7 @@ class EventInfoModal extends Component{
             <h2 className="modal-title">
               {event.eventTitle}
             </h2>
-            <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+            <button type="button" className="close" style={buttonStyle} aria-label="Close" onClick={this.props.onClose}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -63,7 +67,7 @@ class EventInfoModal extends Component{
             </div>
           </div>
           <div className="modal-footer">
-            <button className="btn btn-primary" onClick={this.props.onRegister}> Anmäl </button>
+            <button className="btn btn-primary" style={buttonStyle} onClick={this.props.onRegister}> Anmäl </button>
           </div>
         </div>
       </div>

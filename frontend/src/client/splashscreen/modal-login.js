@@ -22,6 +22,10 @@ class LoginModal extends Component{
       return null;
     }
 
+    if(this.state.isLoggedIn){
+      return <Redirect to="/user"/>
+    }
+
     const backdropStyle = {
       position: 'fixed',
       top: 0,
@@ -56,11 +60,11 @@ class LoginModal extends Component{
               </div>
               <div className="modal-body">
                 <form>
-                  <input type="text" className="form-control mt-3 mb-3" id="user" placeholder="Användarnamn"/>
-                  <input type="password" className="form-control mt-3 mb-3" id="password" placeholder="Lösenord"/>
+                  <input type="text" className="form-control mt-3 mb-3" id="user" placeholder="Användarnamn" onChange={(e)=>{this.setState({userName: e.target.value})}}/>
+                  <input type="password" className="form-control mt-3 mb-3" id="password" placeholder="Lösenord" onChange={(e)=>{this.setState({password: e.target.value})}}/>
                 </form>
 
-                <div className="text-center"><button className="btn btn-primary" onClick={this.props.onRegister}> Logga in </button></div>
+                <div className="text-center"><button className="btn btn-primary" onClick={()=>this.login().then(res=>this.setState({token: res})).then(this.redirect)}> Logga in </button></div>
               </div>
               <div className="modal-footer">
                 <p>Ej medlem? <a href="">Registrera konto</a></p>
@@ -71,6 +75,27 @@ class LoginModal extends Component{
         </div>
       </div>
     );
+  }
+
+  login(){
+
+    return Axios.post('http://ellakk.zapto.org:5050/api/User/login',{
+      userEmail: this.state.userName,
+      userPassword: this.state.password
+    })
+    .then(function (response) {
+      sessionStorage.setItem('userToken',response.data.userToken);
+      return response.data.userToken
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  redirect= () =>{
+    const token = this.state.token
+    if(token){
+      this.setState({isLoggedIn:true})
+    }
   }
 
 }

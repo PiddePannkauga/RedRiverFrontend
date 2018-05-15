@@ -29,7 +29,7 @@ class SplashScreen extends Component{
   render(){
 
     const containerStyle = {
-      
+
       minHeight: '100vh',
       minWidth: '100vw'
     }
@@ -37,6 +37,11 @@ class SplashScreen extends Component{
     const headerStyle = {
       padding: 20,
       margin: '0 auto',
+    };
+
+    const buttonStyle = {
+      minWidth: 100,
+      cursor: 'pointer'
     };
 
     return(
@@ -49,10 +54,10 @@ class SplashScreen extends Component{
           </div>
           <div className="col-sm-3" align="left">
             <div>
-              <button type="button" className="btn btn-primary mb-2" style={{minWidth: 100}} onClick={this.toggleLoginModal}>Logga in</button>
+              <button type="button" className="btn btn-primary mb-2" style={buttonStyle} onClick={this.toggleLoginModal}>Logga in</button>
             </div>
             <div>
-              <button type="button" className="btn btn-primary mb-2" style={{minWidth: 100}}>Registrera</button>
+              <button type="button" className="btn btn-primary mb-2" style={buttonStyle}>Registrera</button>
             </div>
           </div>
 
@@ -67,7 +72,7 @@ class SplashScreen extends Component{
             <EventInfoModal event={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
             <RegisterForEventModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
             <LoginModal show={this.state.isOpenLogin}  onClose={this.toggleLoginModal} />
-            <RegisterAccountModal />
+            {/* <RegisterAccountModal /> */}
           </div>
           <div className="col-sm-3"></div>
         </div>

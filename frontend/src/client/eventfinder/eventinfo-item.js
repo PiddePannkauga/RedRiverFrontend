@@ -28,7 +28,8 @@ class EventInfoItem extends Component{
 
     const containerStyle = {
       padding: 0,
-      margin: 0
+      margin: 0,
+      cursor: 'pointer'
     };
 
     return(
