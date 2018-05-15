@@ -47,6 +47,10 @@ class RegisterForEventModal extends Component{
       padding: '0 auto'
     };
 
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
+
     return(
       <div className="backdrop" style={backdropStyle}>
         <div className="modal-dialog modal-lg" style={modalStyle}>
@@ -54,7 +58,7 @@ class RegisterForEventModal extends Component{
             <div className="container-fluid">
               <div className="modal-header">
                 <div>
-                  <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
+                  <button type="button" className="close" style={buttonStyle} aria-label="Back" onClick={this.props.onBack}>
                     <span aria-hidden="true">&lt;</span>
                   </button>
                 </div>
@@ -62,7 +66,7 @@ class RegisterForEventModal extends Component{
                   <h2 className="modal-title"> Anmäl Dig </h2>
                 </div>
                 <div>
-                  <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                  <button type="button" className="close" style={buttonStyle} aria-label="Close" onClick={this.props.onClose}>
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -162,7 +166,7 @@ class RegisterForEventModal extends Component{
               </div>
 
               <div className="modal-footer">
-                <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Skicka in </button>
+                <button className="btn btn-primary" type="submit" style={buttonStyle} onClick={this.sendRegistration}> Skicka in </button>
               </div>
 
             </div>

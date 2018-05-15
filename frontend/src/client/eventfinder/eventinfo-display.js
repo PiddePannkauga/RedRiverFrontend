@@ -33,11 +33,13 @@ class EventInfoDisplay extends Component{
     const eventsToDisplay=[];
     const searchTermRegex = new RegExp(searchTerm, "i");
 
-    arr.forEach((obj)=>{
-      if(searchTermRegex.test(obj.eventTitle)){
+    arr.forEach((obj) => {
+      if(searchTermRegex.test(obj.eventTitle)) {
         eventsToDisplay.push(obj)
-      }else{
-        if(searchTermRegex.test(obj.eventDescription)){
+      } else {
+        if(searchTermRegex.test(obj.eventDescription)) {
+          eventsToDisplay.push(obj)
+        } else if(searchTermRegex.test(obj.eventAdressCity)) {
           eventsToDisplay.push(obj)
         }
       }

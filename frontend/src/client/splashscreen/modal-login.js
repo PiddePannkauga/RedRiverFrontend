@@ -28,6 +28,10 @@ class LoginModal extends Component{
       )
     }
 
+    if(this.state.isLoggedIn){
+      return <Redirect to="/user"/>
+    }
+
     const backdropStyle = {
       position: 'fixed',
       top: 0,
@@ -64,7 +68,7 @@ class LoginModal extends Component{
               </div>
               <div className="modal-body">
                 <form>
-                  <input type="text" className="form-control mt-3 mb-3" id="user" placeholder="Användarnamn"  onChange={(e)=>{this.setState({userName: e.target.value})}}/>
+                <input type="text" className="form-control mt-3 mb-3" id="user" placeholder="Användarnamn" onChange={(e)=>{this.setState({userName: e.target.value})}}/>
                   <input type="password" className="form-control mt-3 mb-3" id="password" placeholder="Lösenord" onChange={(e)=>{this.setState({password: e.target.value})}}/>
                 </form>
 
@@ -94,7 +98,6 @@ class LoginModal extends Component{
       console.log(error);
     });
   }
-
   redirect= () =>{
     const token = this.state.token
     if(token){

@@ -14,6 +14,8 @@ class EventInfoModal extends Component{
 
     const event = this.props.event
 
+    const date = this.getStartEndFormatted(event);
+
     const backdropStyle = {
       position: 'fixed',
       top: 0,
@@ -32,6 +34,10 @@ class EventInfoModal extends Component{
       padding: '0 auto',
     };
 
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
+
     return(
     <div className="backdrop" style={backdropStyle}>
       <div className="modal-dialog modal-lg" style={modalStyle}>
@@ -40,14 +46,13 @@ class EventInfoModal extends Component{
             <h2 className="modal-title">
               {event.eventTitle}
             </h2>
-            <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+            <button type="button" className="close" style={buttonStyle} aria-label="Close" onClick={this.props.onClose}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div className="modal-body">
             <div className="Date">
-              {event.eventStart}&nbsp;-&nbsp;
-              {event.eventEnd}
+              {date}
             </div>
             <div className="Location">
               {event.eventAdressStreet}
@@ -63,7 +68,7 @@ class EventInfoModal extends Component{
             </div>
           </div>
           <div className="modal-footer">
-            <button className="btn btn-primary" onClick={this.props.onRegister}> Anmäl </button>
+            <button className="btn btn-primary" style={buttonStyle} onClick={this.props.onRegister}> Anmäl </button>
           </div>
         </div>
       </div>
@@ -72,9 +77,20 @@ class EventInfoModal extends Component{
     )
   }
 
-  getMonth(event) {
-    const months = ["Invalid", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
-    return months[parseInt(event.slice(5,7))];
+  getStartEndFormatted(event) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+    const dateStart = new Date(Date.parse(event.eventStart));
+    const dateEnd = new Date(Date.parse(event.eventEnd));
+
+    var eventStart = dateStart.getDate() + ' ' + months[dateStart.getMonth()];
+    var eventEnd = dateEnd.getDate() + ' ' + months[dateEnd.getMonth()];
+
+    if(eventStart === eventEnd) {
+      eventEnd = dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
+    }
+    eventStart += ' ' + dateStart.getHours() + ':' + ('0' + dateStart.getMinutes()).slice(-2);
+
+    return eventStart + ' - ' + eventEnd;
   }
 }
 
