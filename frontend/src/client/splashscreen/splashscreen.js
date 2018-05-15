@@ -20,6 +20,7 @@ class SplashScreen extends Component{
     this.state = {
       searchTerm: '',
       isOpenLogin: false,
+      isOpenRegisterAccount: false,
       selectedEvent:{},
       isOpenEventInfo: false,
       isOpenRegisterForEvent: false
@@ -57,7 +58,7 @@ class SplashScreen extends Component{
               <button type="button" className="btn btn-primary mb-2" style={buttonStyle} onClick={this.toggleLoginModal}>Logga in</button>
             </div>
             <div>
-              <button type="button" className="btn btn-primary mb-2" style={buttonStyle}>Registrera</button>
+              <button type="button" className="btn btn-primary mb-2" style={buttonStyle} onClick={this.toggleRegisterAccountModal}>Registrera</button>
             </div>
           </div>
 
@@ -71,8 +72,8 @@ class SplashScreen extends Component{
             </EventFinderContext.Consumer>
             <EventInfoModal event={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
             <RegisterForEventModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
-            <LoginModal show={this.state.isOpenLogin}  onClose={this.toggleLoginModal} />
-            {/* <RegisterAccountModal /> */}
+            <LoginModal show={this.state.isOpenLogin} onClose={this.toggleLoginModal} />
+            <RegisterAccountModal show={this.state.isOpenRegisterAccount} onClose={this.toggleRegisterAccountModal} />
           </div>
           <div className="col-sm-3"></div>
         </div>
@@ -87,6 +88,12 @@ class SplashScreen extends Component{
   toggleLoginModal = () => {
     this.setState({
       isOpenLogin: !this.state.isOpenLogin
+    });
+  }
+
+  toggleRegisterAccountModal = () => {
+    this.setState({
+      isOpenRegisterAccount: !this.state.isOpenRegisterAccount
     });
   }
 
