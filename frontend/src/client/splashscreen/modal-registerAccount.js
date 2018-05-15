@@ -124,13 +124,8 @@ class RegisterAccountModal extends Component{
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
-<<<<<<< HEAD:frontend/src/components/eventfinder/modal-registerforevent.js
-                        <label htmlFor="gender"> Kön </label>
-                        <DropdownGender />
-=======
                         <label htmlFor="telephone"> Telefonnummer </label>
                         <input type="tel" className="form-control" id="telephone" value={this.state.telephone} onChange={this.handleTextChange} placeholder="Ange ditt telefonnummer"></input>
->>>>>>> origin/Petter-Branch:frontend/src/client/splashscreen/modal-registerAccount.js
                       </div>
                     </div>
                   </div>
