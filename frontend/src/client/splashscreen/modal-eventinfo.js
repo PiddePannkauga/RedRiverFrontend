@@ -14,6 +14,8 @@ class EventInfoModal extends Component{
 
     const event = this.props.event
 
+    const date = this.getStartEndFormatted(event);
+
     const backdropStyle = {
       position: 'fixed',
       top: 0,
@@ -50,8 +52,7 @@ class EventInfoModal extends Component{
           </div>
           <div className="modal-body">
             <div className="Date">
-              {event.eventStart}&nbsp;-&nbsp;
-              {event.eventEnd}
+              {date}
             </div>
             <div className="Location">
               {event.eventAdressStreet}
@@ -76,9 +77,20 @@ class EventInfoModal extends Component{
     )
   }
 
-  getMonth(event) {
-    const months = ["Invalid", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
-    return months[parseInt(event.slice(5,7))];
+  getStartEndFormatted(event) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+    const dateStart = new Date(Date.parse(event.eventStart));
+    const dateEnd = new Date(Date.parse(event.eventEnd));
+
+    var eventStart = dateStart.getDate() + ' ' + months[dateStart.getMonth()];
+    var eventEnd = dateEnd.getDate() + ' ' + months[dateEnd.getMonth()];
+
+    if(eventStart === eventEnd) {
+      eventEnd = dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
+    }
+    eventStart += ' ' + dateStart.getHours() + ':' + ('0' + dateStart.getMinutes()).slice(-2);
+
+    return eventStart + ' - ' + eventEnd;
   }
 }
 

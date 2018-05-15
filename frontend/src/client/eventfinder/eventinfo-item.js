@@ -10,13 +10,8 @@ class EventInfoItem extends Component{
   render(){
 
     const event = this.props.events
-    var eventStart = parseInt(event.eventStart.slice(8,10)) + ' ' + this.getMonth(event.eventStart);
-    var eventEnd = parseInt(event.eventEnd.slice(8,10)) + ' ' + this.getMonth(event.eventEnd);
 
-    if(eventStart === eventEnd) {
-      eventEnd = event.eventEnd.slice(11,16);
-    }
-    eventStart = eventStart + ' ' + event.eventStart.slice(11,16);
+    const date = this.getStartEndFormatted(event);
 
     const cardStyle = {
       padding: 5,
@@ -41,16 +36,14 @@ class EventInfoItem extends Component{
             </h5>
             <div className="row">
               <div className="col-sm-6" id="date">
-                {eventStart}
-                &nbsp;-&nbsp;
-                {eventEnd}
+                {date}
               </div>
               <div className="col-sm-6" align="right" id="city">
                 {event.eventAdressCity}
               </div>
             </div>
             <div className="Description mt-2">
-              {this.props.events.eventDescription}
+              {event.eventDescription}
             </div>
           </div>
         </div>
@@ -58,9 +51,20 @@ class EventInfoItem extends Component{
     )
   }
 
-  getMonth(event) {
-    const months = ["Invalid", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
-    return months[parseInt(event.slice(5,7))];
+  getStartEndFormatted(event) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+    const dateStart = new Date(Date.parse(event.eventStart));
+    const dateEnd = new Date(Date.parse(event.eventEnd));
+
+    var eventStart = dateStart.getDate() + ' ' + months[dateStart.getMonth()];
+    var eventEnd = dateEnd.getDate() + ' ' + months[dateEnd.getMonth()];
+
+    if(eventStart === eventEnd) {
+      eventEnd = dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
+    }
+    eventStart += ' ' + dateStart.getHours() + ':' + ('0' + dateStart.getMinutes()).slice(-2);
+
+    return eventStart + ' - ' + eventEnd;
   }
 }
 
