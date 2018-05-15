@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 
 
-
 class EventInfoItem extends Component{
   constructor(props){
     super(props)

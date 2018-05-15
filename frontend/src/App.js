@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import UserPage from './client/userpage/userpage'
 import SplashScreen from './client/splashscreen/splashscreen';
 import EventProvider from './providers/provider-eventfinder';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 
 class App extends Component {
 
