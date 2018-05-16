@@ -4,6 +4,8 @@ import {EventFinderContext} from '../../providers/provider-eventfinder';
 import SearchBar from '../../components/searchbar';
 import EventWorkInfoModal from './modal-eventworkinfo';
 import CreateEventModal from './modal-createEvent';
+import UserPageNavbar from './userpageNavbar';
+import MyEvents from './myevents';
 import Axios from 'axios';
 
 
@@ -16,14 +18,12 @@ class UserPage extends Component{
       selectedEvent: {},
       isAdmin: false,
       isOpenRegisterForEventWork: false,
-      isOpenCreateEvent: false
+      isOpenCreateEvent: false,
+      conditionalUserPageRender: "myEvents"
     };
   }
 
   componentDidMount(){
-    this.fetchEventInfoUser().then(res=>
-      this.setState({userEvents: res})
-    )
     this.fetchIsAdmin().then(res=>{
       if(res >= 2){
         this.setState({isAdmin: true})
@@ -32,25 +32,21 @@ class UserPage extends Component{
   }
 
   render(){
-    if(this.state.isAdmin){
+
     return(
       <div>
-        <button onClick={this.toggleCreateEvent}>Skapa event</button>
-        <SearchBar onChange={this.searchTermChange}/>
+        <UserPageNavbar isAdmin={this.state.isAdmin} onClick={this.handleNavChange}/>
+        <MyEvents/>
+        {/* <SearchBar onChange={this.searchTermChange}/>
         <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoWorkModal}/>
-        <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEventWork} onClose={this.toggleEventInfoWorkModal}/>
+        <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEventWork} onClose={this.toggleEventInfoWorkModal}/> */}
+
         <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
       </div>
     )
-    }else{
-      return(
-      <div>
-      <SearchBar onChange={this.searchTermChange}/>
-      <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoWorkModal}/>
-      <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEventWork} onClose={this.toggleEventInfoWorkModal}/>
-      </div>
-    )}
   }
+
+
   searchTermChange = (term) =>{
     this.setState({searchTerm: term})
   }
@@ -81,6 +77,15 @@ class UserPage extends Component{
       })
     }
 
+  }
+
+  handleNavChange=(navLink) =>{
+    const navLinkID = navLink.target.id;
+
+    this.setState({conditionalUserPageRender:navLinkID})
+    if(navLinkID === "createEvent"){
+      this.toggleCreateEvent();
+    }
   }
 
   getSelectedEvent(selectedEvent){
