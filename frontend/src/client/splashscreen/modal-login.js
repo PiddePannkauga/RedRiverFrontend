@@ -18,7 +18,6 @@ class LoginModal extends Component{
   }
 
   render(){
-
     if(!this.props.show) {
       return null;
     }
@@ -50,7 +49,9 @@ class LoginModal extends Component{
       padding: '0 auto'
     };
 
-
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
 
     return (
       <div className="backdrop" style={backdropStyle}>
@@ -62,7 +63,7 @@ class LoginModal extends Component{
                 <h2 className="modal-title">
                   Logga in
                 </h2>
-                <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                <button type="button" className="close" style={buttonStyle} aria-label="Close" onClick={this.props.onClose}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -72,7 +73,7 @@ class LoginModal extends Component{
                   <input type="password" className="form-control mt-3 mb-3" id="password" placeholder="Lösenord" onChange={(e)=>{this.setState({password: e.target.value})}}/>
                 </form>
 
-                <div className="text-center"><button className="btn btn-primary" onClick={()=>this.login().then(res=>this.setState({token: res})).then(this.redirect)}> Logga in </button></div>
+                <div className="text-center"><button className="btn btn-primary" style={buttonStyle} onClick={()=>this.login().then(res=>this.setState({token: res})).then(this.redirect)}> Logga in </button></div>
               </div>
               <div className="modal-footer">
                 <p>Ej medlem? <a href="">Registrera konto</a></p>

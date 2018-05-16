@@ -78,13 +78,13 @@ class RegisterForEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="firstname"> Förnamn </label>
-                        <input type="text" className="form-control" id="firstname" value={this.state.firstName} onChange={this.handleTextChange} placeholder="Ange ditt förnamn"/>
+                        <input type="text" className="form-control" id="firstname" value={this.state.firstname} onChange={this.handleTextChange} placeholder="Ange ditt förnamn"/>
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="lastname"> Efternamn </label>
-                        <input type="text" className="form-control" id="lastname"value={this.state.lastname} onChange={this.handleTextChange} placeholder="Ange ditt efternamn"></input>
+                        <input type="text" className="form-control" id="lastname" value={this.state.lastname} onChange={this.handleTextChange} placeholder="Ange ditt efternamn"></input>
                       </div>
                     </div>
                   </div>
