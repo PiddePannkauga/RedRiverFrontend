@@ -142,55 +142,36 @@ class CreateEventModal extends Component{
 
   sendRegistration = () =>{
 
-    console.log(sessionStorage.getItem("userToken"))
-    // Axios.post('http://ellakk.zapto.org:5050/api/Admin/events/create',{
-    //
-    //   params:{userToken: '7PJ54E26Q2329BH5ZMQF'}
+    Axios({
+      method: 'post',
+      url: 'http://ellakk.zapto.org:5050/api/Admin/events/create',
+      params:{userToken: sessionStorage.getItem("userToken")},
+      data: {
+        eventTitle: this.state.eventTitle,
+        eventDescription: this.state.eventDescription,
+        eventStart: this.state.eventStart,
+        eventEnd: this.state.eventEnd,
+        eventContactPhone: this.state.eventContactPhone,
+        eventContactEmail: this.state.eventContactEmail,
+        eventAdressCity: this.state.eventAdressCity,
+        eventAdressStreet: this.state.eventAdressStreet,
+        eventAdressPostal: this.state.eventAdressPostal
+      }
+    });
 
-    //
-    // }).then((res=>{
-    //   console.log(res.status)
-    // }
+    this.props.onClose()
 
-  // ));
-  Axios({
-    method: 'post',
-    url: 'http://ellakk.zapto.org:5050/api/Admin/events/create',
-    params:{userToken: '7PJ54E26Q2329BH5ZMQF'},
-    data: {
-      eventTitle: this.state.eventTitle,
-      eventDescription: this.state.eventDescription,
-      eventStart: this.state.eventStart,
-      eventEnd: this.state.eventEnd,
-      eventContactPhone: this.state.eventContactPhone,
-      eventContactEmail: this.state.eventContactEmail,
-      eventAdressCity: this.state.eventAdressCity,
-      eventAdressStreet: this.state.eventAdressStreet,
-      eventAdressPostal: this.state.eventAdressPostal
-    }
-  });
+  }
 
-  this.props.onClose()
+  handleTextChange=(event) => {
+    const name = event.target.id;
+    const value = event.target.value;
+    console.log(event.target.value)
+    this.setState({
+      [name]: value
+    });
 
-}
-
-handleTextChange=(event) => {
-  const name = event.target.id;
-  const value = event.target.value;
-  console.log(event.target.value)
-  this.setState({
-    [name]: value
-  });
-
-}
-
-handleCheckboxChange=(event)=>{
-  const name = event.target.id;
-  const value = !event.target.checked;
-  this.setState({
-    [name]: value
-  });
-}
+  }
 
 }
 

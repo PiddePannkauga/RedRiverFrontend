@@ -12,12 +12,14 @@ class EventInfoDisplay extends Component{
     };
   }
 
+
+
   componentDidUpdate(){
-    const eventsToDisplay = this.eventSearch(this.props.searchTerm,this.props.events)
-
-
-    if(JSON.stringify(this.state.eventsToDisplay) !== JSON.stringify(eventsToDisplay)){
-      this.setState({eventsToDisplay})
+    if(this.props.events){
+      const eventsToDisplay = this.eventSearch(this.props.searchTerm,this.props.events)
+      if(JSON.stringify(this.state.eventsToDisplay) !== JSON.stringify(eventsToDisplay)){
+        this.setState({eventsToDisplay})
+      }
     }
   }
 
@@ -46,7 +48,7 @@ class EventInfoDisplay extends Component{
     }
   )
   return eventsToDisplay;
-  }
+}
 
 }
-  export default EventInfoDisplay;
+export default EventInfoDisplay;
