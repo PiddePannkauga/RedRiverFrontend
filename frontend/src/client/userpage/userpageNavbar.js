@@ -15,7 +15,7 @@ const UserPageNavbar = (props) =>{
           {props.isAdmin &&
             <a className="nav-link" onClick={props.onClick} id="createEvent">Skapa Event</a>}
             {props.isAdmin &&
-              <a className="nav-link" onClick={props.onClick} id="mycreatedEvents">Mina Skapade Event</a>}
+              <a className="nav-link" onClick={props.onClick} id="myCreatedEvents">Mina Skapade Event</a>}
             </div>
           </div>
         </nav>
