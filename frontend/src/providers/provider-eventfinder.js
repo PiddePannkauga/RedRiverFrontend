@@ -10,7 +10,6 @@ export default class EventFinderProvider extends Component{
   state = {
 
     eventsPublic: [],
-    eventsUser:  []
   }
 
   componentDidMount(){
@@ -32,15 +31,7 @@ export default class EventFinderProvider extends Component{
     })
   }
 
-  fetchEventInfoUser(){
-    return Axios.get('http://ellakk.zapto.org:5050/api/User/events',{
-      params: { userToken: sessionStorage.getItem('userToken') }
 
-    }).then(res => {
-      localStorage.setItem('EventsUser' , JSON.stringify(res.data));
-      return res.data
-    })
-  }
 
 
   render(){
@@ -48,7 +39,6 @@ export default class EventFinderProvider extends Component{
       <EventFinderContext.Provider value= {{
         state: this.state,
         fetchEvent: (res) => {this.fetchEventInfoPublic().then(res => {this.setState({events:res})})},
-        fetchEventUser: (res)=>{this.fetchEventInfoUser().then(res => {this.setState({eventsUser:res})})},
       }}>
       {this.props.children}
     </EventFinderContext.Provider>
