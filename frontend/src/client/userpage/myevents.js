@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import EventFinder from '../eventfinder/eventinfo-display';
 import SearchBar from '../../components/searchbar';
 import EventWorkInfoModal from './modal-eventworkinfo';
+import MyCreatedEvents from './mycreatedEvents';
 import Axios from 'axios';
 
 class MyEvents extends Component{
@@ -25,46 +26,48 @@ class MyEvents extends Component{
   render(){
     return(
       <div>
-      <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoWorkModal}/>
-      <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEventWork} onClose={this.toggleEventInfoWorkModal}/>
-    </div>
+        <h2>Mina Events</h2>
+        <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoWorkModal}/>
+        <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEventWork} onClose={this.toggleEventInfoWorkModal}/>
+        {this.props.isAdmin && <MyCreatedEvents/>}
+      </div>
     )
-    }
+  }
 
-    toggleEventInfoWorkModal = (selectedEvent) => {
-      if(!this.state.isOpenRegisterForEventWork){
-        this.getSelectedEvent(selectedEvent);
-        this.setState({
+  toggleEventInfoWorkModal = (selectedEvent) => {
+    if(!this.state.isOpenRegisterForEventWork){
+      this.getSelectedEvent(selectedEvent);
+      this.setState({
 
-          isOpenRegisterForEventWork: !this.state.isOpenRegisterForEventWork
-        })
-      }else{
-        this.setState({
-          selectedEvent: {},
-          isOpenRegisterForEventWork: !this.state.isOpenRegisterForEventWork
-        })
-      }
-    }
-
-    getSelectedEvent(selectedEvent){
-      this.state.userEvents.forEach((obj)=>{
-        if(selectedEvent.eventId === obj.eventId)
-
-        this.setState({selectedEvent: obj})
-        return
+        isOpenRegisterForEventWork: !this.state.isOpenRegisterForEventWork
       })
-    }
-
-    fetchEventInfoUser(){
-
-      return Axios.get('http://ellakk.zapto.org:5050/api/User/events',{
-        params: { userToken: sessionStorage.getItem('userToken') }
-
-      }).then(res => {
-        localStorage.setItem('EventsUser' , JSON.stringify(res.data));
-        return res.data
+    }else{
+      this.setState({
+        selectedEvent: {},
+        isOpenRegisterForEventWork: !this.state.isOpenRegisterForEventWork
       })
     }
   }
+
+  getSelectedEvent(selectedEvent){
+    this.state.userEvents.forEach((obj)=>{
+      if(selectedEvent.eventId === obj.eventId)
+
+      this.setState({selectedEvent: obj})
+      return
+    })
+  }
+
+  fetchEventInfoUser(){
+
+    return Axios.get('http://ellakk.zapto.org:5050/api/User/events',{
+      params: { userToken: sessionStorage.getItem('userToken') }
+
+    }).then(res => {
+      localStorage.setItem('EventsUser' , JSON.stringify(res.data));
+      return res.data
+    })
+  }
+}
 
 export default MyEvents;

@@ -28,6 +28,7 @@ class MyCreatedEvents extends Component{
   render(){
     return(
       <div>
+        <h2>Mina Skapade Event</h2>
         <EventFinder events={this.state.adminCreatedEvents} onClick={this.toggleEditEventModal}/>
         <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />
       </div>

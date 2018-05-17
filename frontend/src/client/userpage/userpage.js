@@ -36,10 +36,10 @@ class UserPage extends Component{
 
     return(
       <div>
-        <UserPageNavbar isAdmin={this.state.isAdmin} onClick={this.handleNavChange}/>
+        <UserPageNavbar onClick={this.handleNavChange}/>
 
-        {this.state.conditionalUserPageRender === "myEvents" && <MyEvents/>}
-        {this.state.conditionalUserPageRender === "myCreatedEvents"  && <MyCreatedEvents />}
+        {this.state.conditionalUserPageRender === "myEvents" && <MyEvents isAdmin={this.state.isAdmin}/>}
+
 
         <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
       </div>
