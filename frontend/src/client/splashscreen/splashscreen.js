@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Logo from '../../components/logo';
-import EventInfoDisplay from '../eventfinder/eventinfo-display';
+import EventFinder from '../eventfinder/eventinfo-display';
 import SearchBar from '../../components/searchbar';
 import Button from '../../components/button'
 import DropDown from '../../components/dropdown';
@@ -23,8 +23,13 @@ class SplashScreen extends Component{
       isOpenRegisterAccount: false,
       selectedEvent:{},
       isOpenEventInfo: false,
-      isOpenRegisterForEvent: false
+      isOpenRegisterForEvent: false,
+      publicEvents: []
     };
+  }
+
+  componentDidMount(){
+    this.fetchEventInfoPublic().then(res=>{this.setState({publicEvents:res})})
   }
 
   render(){
@@ -65,11 +70,7 @@ class SplashScreen extends Component{
           <div className="col-sm-3"></div>
           <div className="col-sm-6">
             <SearchBar onChange={this.searchTermChange}/>
-            <EventFinderContext.Consumer>
-              {(context) => (
-                <EventInfoDisplay events={context.state.eventsPublic} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoModal}/>
-              )}
-            </EventFinderContext.Consumer>
+            <EventFinder events={this.state.publicEvents} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoModal}/>
             <EventInfoModal event={this.state.selectedEvent} show={this.state.isOpenEventInfo} onClose={this.toggleEventInfoModal} onRegister={this.toggleRegisterForEventModal}/>
             <RegisterForEventModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEvent} onClose={this.toggleRegisterForEventModal} onBack={this.returnToEventInfo}/>
             <LoginModal show={this.state.isOpenLogin} onClose={this.toggleLoginModal} />
@@ -79,6 +80,14 @@ class SplashScreen extends Component{
         </div>
       </div>
     )
+  }
+
+  fetchEventInfoPublic(){
+
+    return Axios.get('http://ellakk.zapto.org:5050/api/Events').then(res => {
+      localStorage.setItem('EventsPublic' , JSON.stringify(res.data));
+      return res.data
+    })
   }
 
   searchTermChange = (term) =>{
