@@ -7,6 +7,8 @@ import UserPageNavbar from './userpageNavbar';
 import MyEvents from './myevents';
 import MyCreatedEvents from './mycreatedEvents';
 import ApplyForEvents from './applyforevents';
+import UserProfile from './userprofile'
+
 import Axios from 'axios';
 import {Route, Redirect } from 'react-router-dom';
 
@@ -47,8 +49,7 @@ class UserPage extends Component{
 
         {this.state.conditionalUserPageRender === "myEvents" && <MyEvents isAdmin={this.state.isAdmin}/>}
         {this.state.conditionalUserPageRender === "applyEvent" && <ApplyForEvents />}
-
-
+        {this.state.conditionalUserPageRender === "profile" && <UserProfile />}
 
       </div>
     )
