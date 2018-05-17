@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import EventInfoList from './eventinfo-list';
-// import '../../styles/eventinfo.css';
 
 
 class EventInfoDisplay extends Component{
