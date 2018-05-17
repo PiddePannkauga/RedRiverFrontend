@@ -50,11 +50,6 @@ class CreateEventModal extends Component{
             <div className="container-fluid">
               <div className="modal-header">
                 <div>
-                  <button type="button" className="close" aria-label="Back" onClick={this.props.onBack}>
-                    <span aria-hidden="true">&lt;</span>
-                  </button>
-                </div>
-                <div>
                   <h2 className="modal-title"> Skapa Event </h2>
                 </div>
                 <div>
