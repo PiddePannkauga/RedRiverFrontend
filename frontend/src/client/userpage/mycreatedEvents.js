@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import EventFinder from '../eventfinder/eventinfo-display';
 import Axios from 'axios';
 import EditEventModal from './modal-editevent';
+import CreateEventModal from './modal-createEvent';
 
 class MyCreatedEvents extends Component{
 
@@ -11,6 +12,7 @@ class MyCreatedEvents extends Component{
       adminCreatedEvents: [],
       selectedEvent: {},
       isOpenEditEventModal: false,
+      isOpenCreateEvent: false,
       eventEdited: false
     }
   }
@@ -28,12 +30,27 @@ class MyCreatedEvents extends Component{
   render(){
     return(
       <div>
+        <button className="btn btn-primary" onClick={this.toggleCreateEvent}>Skapa Event</button>
         <h2>Mina Skapade Event</h2>
         <EventFinder events={this.state.adminCreatedEvents} onClick={this.toggleEditEventModal}/>
         <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />
+        <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
       </div>
 
     )
+  }
+
+  toggleCreateEvent = () =>{
+    if(!this.state.isOpenCreateEvent){
+      this.setState({
+        isOpenCreateEvent: !this.state.isOpenCreateEvent
+      })
+    }else{
+      this.setState({
+        isOpenCreateEvent: !this.state.isOpenCreateEvent
+      })
+    }
+
   }
 
   toggleEditEventModal = (selectedEvent) => {

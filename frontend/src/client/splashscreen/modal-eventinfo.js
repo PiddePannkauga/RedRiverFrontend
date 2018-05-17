@@ -68,7 +68,7 @@ class EventInfoModal extends Component{
             </div>
           </div>
           <div className="modal-footer">
-            <button className="btn btn-primary" style={buttonStyle} onClick={this.props.onRegister}> Anmäl </button>
+            <button type="button" className="btn btn-primary" style={buttonStyle} onClick={this.props.onRegister}> Anmäl </button>
           </div>
         </div>
       </div>

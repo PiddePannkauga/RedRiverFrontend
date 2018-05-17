@@ -12,7 +12,7 @@ class MyEvents extends Component{
       searchTerm: '',
       userEvents: [],
       selectedEvent: {},
-      isOpenRegisterForEventWork: false,
+      isOpenMyEventModal: false,
     }
 
   }
@@ -27,24 +27,24 @@ class MyEvents extends Component{
     return(
       <div>
         <h2>Mina Events</h2>
-        <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoWorkModal}/>
-        <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEventWork} onClose={this.toggleEventInfoWorkModal}/>
+        <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleMyEventInfoWorkModal}/>
+        <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenMyEventModal} onClose={this.toggleMyEventInfoWorkModal}/>
         {this.props.isAdmin && <MyCreatedEvents/>}
       </div>
     )
   }
 
-  toggleEventInfoWorkModal = (selectedEvent) => {
-    if(!this.state.isOpenRegisterForEventWork){
+  toggleMyEventInfoWorkModal = (selectedEvent) => {
+    if(!this.state.isOpenMyEventModal){
       this.getSelectedEvent(selectedEvent);
       this.setState({
 
-        isOpenRegisterForEventWork: !this.state.isOpenRegisterForEventWork
+        isOpenMyEventModal: !this.state.isOpenMyEventModal
       })
     }else{
       this.setState({
         selectedEvent: {},
-        isOpenRegisterForEventWork: !this.state.isOpenRegisterForEventWork
+        isOpenMyEventModal: !this.state.isOpenMyEventModal
       })
     }
   }
