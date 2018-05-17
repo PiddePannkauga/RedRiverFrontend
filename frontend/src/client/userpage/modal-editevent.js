@@ -8,7 +8,7 @@ class EditEventModal extends Component{
     super(props)
 
     this.state ={
-      eventTitle: '',
+      eventTitle: props.event.eventTitle,
       eventDescription: '',
       eventStart: '',
       eventEnd: '',
@@ -19,7 +19,6 @@ class EditEventModal extends Component{
       eventAdressPostal: '',
     }
   }
-
 
   render(){
     if(!this.props.show){
@@ -68,7 +67,7 @@ class EditEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventTitle"> Titel </label>
-                        <input type="text" className="form-control" id="eventTitle" value={this.state.eventTitle} onChange={this.handleTextChange} placeholder={this.props.event.eventTitle}/>
+                        <input type="text" className="form-control" id="eventTitle" value={this.state.eventTitle} onChange={this.handleTextChange} />
                       </div>
                     </div>
                   </div>
@@ -134,7 +133,7 @@ class EditEventModal extends Component{
             </div>
           </div>
         </div>
-      </div>  
+      </div>
     )
   }
 

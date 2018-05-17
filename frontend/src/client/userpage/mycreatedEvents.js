@@ -33,7 +33,8 @@ class MyCreatedEvents extends Component{
         <button className="btn btn-primary" onClick={this.toggleCreateEvent}>Skapa Event</button>
         <h2>Mina Skapade Event</h2>
         <EventFinder events={this.state.adminCreatedEvents} onClick={this.toggleEditEventModal}/>
-        <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />
+        {this.state.isOpenEditEventModal &&
+          <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />}
         <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
       </div>
 
