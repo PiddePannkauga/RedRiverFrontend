@@ -16,6 +16,7 @@ const UserPageNavbar = (props) =>{
           <a className="nav-link" onClick={props.onClick} id="profile">Profil</a>
         </div>
       </div>
+      <button type="button" className="btn btn-primary mb-2" onClick={props.logout}>Logga Ut</button>
     </nav>
 
   )

@@ -8,6 +8,7 @@ import UserPageNavbar from './userpageNavbar';
 import MyEvents from './myevents';
 import MyCreatedEvents from './mycreatedEvents';
 import Axios from 'axios';
+import {Route, Redirect } from 'react-router-dom';
 
 
 class UserPage extends Component{
@@ -20,7 +21,8 @@ class UserPage extends Component{
       isAdmin: false,
       isOpenRegisterForEventWork: false,
       isOpenCreateEvent: false,
-      conditionalUserPageRender: "myEvents"
+      conditionalUserPageRender: "myEvents",
+      isLoggedIn: true
     };
   }
 
@@ -32,11 +34,17 @@ class UserPage extends Component{
     })
   }
 
+
+
   render(){
+
+    if(!this.state.isLoggedIn){
+      return <Redirect to="/public"/>
+    }
 
     return(
       <div>
-        <UserPageNavbar onClick={this.handleNavChange}/>
+        <UserPageNavbar onClick={this.handleNavChange} logout={this.logout}/>
 
         {this.state.conditionalUserPageRender === "myEvents" && <MyEvents isAdmin={this.state.isAdmin}/>}
 
@@ -46,6 +54,12 @@ class UserPage extends Component{
     )
   }
 
+  logout=()=>{
+    this.setState({
+      isLoggedIn: false
+    })
+    sessionStorage.removeItem("userToken");
+  }
 
   toggleCreateEvent = () =>{
     if(!this.state.isOpenCreateEvent){

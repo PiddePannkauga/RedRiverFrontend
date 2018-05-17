@@ -21,11 +21,6 @@ class LoginModal extends Component{
     if(!this.props.show) {
       return null;
     }
-    if(this.state.isLoggedIn){
-      return(
-        <Redirect to="/user"/>
-      )
-    }
 
     if(this.state.isLoggedIn){
       return <Redirect to="/user"/>
