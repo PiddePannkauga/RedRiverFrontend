@@ -10,12 +10,19 @@ class MyCreatedEvents extends Component{
     this.state={
       adminCreatedEvents: [],
       selectedEvent: {},
-      isOpenEditEventModal: false
+      isOpenEditEventModal: false,
+      eventEdited: false
     }
   }
 
   componentDidMount(){
     this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
+  }
+
+  componentDidUpdate(){
+    if(this.state.eventEdited){
+      this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
+    }
   }
 
   render(){
@@ -37,6 +44,7 @@ class MyCreatedEvents extends Component{
     }else{
       this.setState({
         selectedEvent: {},
+
         isOpenEditEventModal: !this.state.isOpenEditEventModal
       })
     }

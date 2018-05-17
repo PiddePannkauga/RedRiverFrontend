@@ -11,16 +11,14 @@ const UserPageNavbar = (props) =>{
       <div className="navbar" id="navbarNavAltMarkup">
         <div className="navbar-nav">
           <a className="nav-link"  onClick={props.onClick} id="myEvents">Mina Event</a>
-          <a  className="nav-link" onClick={props.onClick} id="applyEvent">Ansök till Event</a>
-          {props.isAdmin &&
-            <a className="nav-link" onClick={props.onClick} id="createEvent">Skapa Event</a>}
-            {props.isAdmin &&
-              <a className="nav-link" onClick={props.onClick} id="myCreatedEvents">Mina Skapade Event</a>}
-            </div>
-          </div>
-        </nav>
+          <a className="nav-link" onClick={props.onClick} id="applyEvent">Ansök till Event</a>
+          <a className="nav-link" onClick={props.onClick} id="settings">Inställningar</a>
+          <a className="nav-link" onClick={props.onClick} id="profile">Profil</a>
+        </div>
+      </div>
+    </nav>
 
-      )
-    }
+  )
+}
 
-    export default UserPageNavbar;
+export default UserPageNavbar;

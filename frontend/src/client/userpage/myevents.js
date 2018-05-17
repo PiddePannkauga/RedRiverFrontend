@@ -25,15 +25,10 @@ class MyEvents extends Component{
   render(){
     return(
       <div>
-      <SearchBar onChange={this.searchTermChange}/>
       <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleEventInfoWorkModal}/>
       <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenRegisterForEventWork} onClose={this.toggleEventInfoWorkModal}/>
     </div>
     )
-    }
-
-    searchTermChange = (term) =>{
-      this.setState({searchTerm: term})
     }
 
     toggleEventInfoWorkModal = (selectedEvent) => {
@@ -61,7 +56,7 @@ class MyEvents extends Component{
     }
 
     fetchEventInfoUser(){
-    
+
       return Axios.get('http://ellakk.zapto.org:5050/api/User/events',{
         params: { userToken: sessionStorage.getItem('userToken') }
 

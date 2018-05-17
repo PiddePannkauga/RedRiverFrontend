@@ -8,7 +8,6 @@ class EditEventModal extends Component{
     super(props)
 
     this.state ={
-      updatedEvent: '',
       eventTitle: '',
       eventDescription: '',
       eventStart: '',
@@ -135,13 +134,13 @@ class EditEventModal extends Component{
             </div>
           </div>
         </div>
-      </div>
+      </div>  
     )
   }
 
   sendRegistration = () =>{
 
-    //Kolla states ifall de har ändrats. Skicka med ändringen som json object
+
     const updatedEvent = this.checkUpdatedEventFields()
 
     Axios({
