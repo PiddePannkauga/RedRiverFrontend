@@ -59,7 +59,6 @@ class MyEvents extends Component{
   }
 
   fetchEventInfoUser(){
-
     return Axios.get('http://ellakk.zapto.org:5050/api/User/events',{
       params: { userToken: sessionStorage.getItem('userToken') }
 

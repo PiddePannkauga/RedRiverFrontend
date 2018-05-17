@@ -6,6 +6,7 @@ import EventWorkInfoModal from './modal-eventworkinfo';
 import UserPageNavbar from './userpageNavbar';
 import MyEvents from './myevents';
 import MyCreatedEvents from './mycreatedEvents';
+import ApplyForEvents from './applyforevents';
 import Axios from 'axios';
 import {Route, Redirect } from 'react-router-dom';
 
@@ -45,6 +46,7 @@ class UserPage extends Component{
         <UserPageNavbar onClick={this.handleNavChange} logout={this.logout}/>
 
         {this.state.conditionalUserPageRender === "myEvents" && <MyEvents isAdmin={this.state.isAdmin}/>}
+        {this.state.conditionalUserPageRender === "applyEvent" && <ApplyForEvents />}
 
 
 
