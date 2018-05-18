@@ -4,6 +4,7 @@ import Axios from 'axios';
 import EditEventModal from './modal-editevent';
 import CreateEventModal from './modal-createEvent';
 
+
 class MyCreatedEvents extends Component{
 
   constructor(props){
@@ -13,7 +14,6 @@ class MyCreatedEvents extends Component{
       selectedEvent: {},
       isOpenEditEventModal: false,
       isOpenCreateEvent: false,
-      eventEdited: false
     }
   }
 
@@ -21,10 +21,10 @@ class MyCreatedEvents extends Component{
     this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
   }
 
-  componentDidUpdate(){
-    if(this.state.eventEdited){
-      this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
-    }
+  componentDidUpdate(prevProps, prevState, snapshot){
+    if(this.state.adminCreatedEvents === prevState.adminCreatedEvents){
+     this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
+   }
   }
 
   render(){
@@ -34,57 +34,51 @@ class MyCreatedEvents extends Component{
         <h2>Mina Skapade Event</h2>
         <EventFinder events={this.state.adminCreatedEvents} onClick={this.toggleEditEventModal}/>
         {this.state.isOpenEditEventModal &&
-          <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />}
+        <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />}
         <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
-      </div>
+        </div>
 
-    )
-  }
+      )
+    }
 
-  toggleCreateEvent = () =>{
-    if(!this.state.isOpenCreateEvent){
-      this.setState({
-        isOpenCreateEvent: !this.state.isOpenCreateEvent
-      })
-    }else{
+    toggleCreateEvent = () =>{
       this.setState({
         isOpenCreateEvent: !this.state.isOpenCreateEvent
       })
     }
 
-  }
+    toggleEditEventModal = (selectedEvent) => {
+      if(!this.state.isOpenEditEventModal){
+        this.getSelectedEvent(selectedEvent);
+        this.setState({
+          isOpenEditEventModal: !this.state.isOpenEditEventModal,
 
-  toggleEditEventModal = (selectedEvent) => {
-    if(!this.state.isOpenEditEventModal){
-      this.getSelectedEvent(selectedEvent);
-      this.setState({
-        isOpenEditEventModal: !this.state.isOpenEditEventModal
+        })
+      }else{
+        this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
+        this.setState({
+          selectedEvent: {},
+          isOpenEditEventModal: !this.state.isOpenEditEventModal
+        })
+      }
+    }
+
+    getSelectedEvent(selectedEvent){
+      this.state.adminCreatedEvents.forEach((obj)=>{
+        if(selectedEvent.eventId === obj.eventId)
+
+        this.setState({selectedEvent: obj})
+        return
       })
-    }else{
-      this.setState({
-        selectedEvent: {},
+    }
 
-        isOpenEditEventModal: !this.state.isOpenEditEventModal
+    fetchAdminCreatedEvents(){
+      return Axios.get("http://ellakk.zapto.org:5050/api/Admin/events",{
+        params:{ userToken: sessionStorage.getItem('userToken')}
+      }).then(res=>{
+        return res.data
       })
     }
   }
 
-  getSelectedEvent(selectedEvent){
-    this.state.adminCreatedEvents.forEach((obj)=>{
-      if(selectedEvent.eventId === obj.eventId)
-
-      this.setState({selectedEvent: obj})
-      return
-    })
-  }
-
-  fetchAdminCreatedEvents(){
-    return Axios.get("http://ellakk.zapto.org:5050/api/Admin/events",{
-      params:{ userToken: sessionStorage.getItem('userToken')}
-    }).then(res=>{
-      return res.data
-    })
-  }
-}
-
-export default MyCreatedEvents;
+  export default MyCreatedEvents;
