@@ -16,7 +16,10 @@ class ApplyForEventModal extends Component{
   }
 
   componentDidMount(){
-    this.fetchEventRoles().then(res=>{this.setState({eventRolesToApplyFor: res})})
+    this.fetchEventRoles().then(res=>{this.setState({
+      eventRolesToApplyFor: res,
+      roleDescription: res[0].roleDescription
+    })})
   }
 
   render(){
