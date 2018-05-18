@@ -9,8 +9,14 @@ class ApplyForEventModal extends Component{
 
     this.state ={
       userRoleTitle: '',
-      userRoleDescription: ''
+      userRoleDescription: '',
+      eventRolesToApplyFor:[],
+      roleDescription:''
     }
+  }
+
+  componentDidMount(){
+    this.fetchEventRoles().then(res=>{this.setState({eventRolesToApplyFor: res})})
   }
 
   render(){
@@ -52,9 +58,10 @@ class ApplyForEventModal extends Component{
                 </div>
               </div>
               <div className="modal-body">
-                <form>
-
-                </form>
+              {this.roleList(this.state.eventRolesToApplyFor)}
+              <div>
+                {this.state.roleDescription}
+              </div>
               </div>
 
               <div className="modal-footer">
@@ -72,7 +79,7 @@ class ApplyForEventModal extends Component{
 
     Axios({
       method: 'post',
-      url: 'http://ellakk.zapto.org:5050/api/User/events/'+this.props.event.eventId,
+      url: 'http://ellakk.zapto.org:5050/api/User/events/'+this.props.event.eventId+"/roles",
       params:{userToken: sessionStorage.getItem("userToken")},
       data: {
         userRoleTitle: this.state.userRoleTitle,
@@ -84,6 +91,14 @@ class ApplyForEventModal extends Component{
 
   }
 
+  fetchEventRoles=()=>{
+    return Axios.get("http://ellakk.zapto.org:5050/api/User/events/"+this.props.event.eventId+"/roles",{
+    params:{userToken: sessionStorage.getItem("userToken")}
+  }).then(res=>{
+    return res.data
+  })
+  }
+
   handleTextChange=(event) => {
     const name = event.target.id;
     const value = event.target.value;
@@ -93,6 +108,31 @@ class ApplyForEventModal extends Component{
     });
 
   }
+
+  handleRoleChange=(selectedRole)=>{
+    console.log("Hej")
+    console.log(selectedRole.target.value)
+    this.state.eventRolesToApplyFor.forEach(obj=>{
+      if(obj.roleTitle === selectedRole.target.value){
+        this.setState({roleDescription:obj.roleDescription})
+      }
+    })
+  }
+
+  roleList = (roleArray) =>{
+    const roles = roleArray.map((obj)=>{
+      return(
+        <option key={obj.roleId} value={obj.roleTitle}>{obj.roleTitle} </option>
+        );
+      });
+      return(
+        <div>
+          <select onChange={this.handleRoleChange}>
+          {roles}
+          </select>
+        </div>
+      )
+    }
 
 }
 

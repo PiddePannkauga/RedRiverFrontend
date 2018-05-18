@@ -26,7 +26,7 @@ class ApplyForEvents extends Component{
       <div>
       <SearchBar onChange={this.searchTermChange}/>
       <EventFinder events={this.state.applicationEvents} searchTerm={this.state.searchTerm} onClick={this.toggleApplyForEventWorkModal}/>
-      <ApplyForEventWorkModal event={this.state.selectedEvent} show={this.state.isOpenApplyForEventWork} onClose={this.toggleApplyForEventWorkModal}/>
+      {this.state.isOpenApplyForEventWork && <ApplyForEventWorkModal event={this.state.selectedEvent} show={this.state.isOpenApplyForEventWork} onClose={this.toggleApplyForEventWorkModal}/>}
       </div>
     )
   }
