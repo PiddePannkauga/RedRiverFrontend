@@ -3,7 +3,7 @@ import EventFinder from '../eventfinder/eventinfo-display';
 import {EventFinderContext} from '../../providers/provider-eventfinder';
 import SearchBar from '../../components/searchbar';
 import EventWorkInfoModal from './modal-eventworkinfo';
-import UserPageNavbar from './userpageNavbar';
+import UserPageNavbar from './navbar-userpage';
 import MyEvents from './myevents';
 import MyCreatedEvents from './mycreatedEvents';
 import ApplyForEvents from './applyforevents';
