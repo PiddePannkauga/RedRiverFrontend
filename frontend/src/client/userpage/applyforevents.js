@@ -46,7 +46,11 @@ class ApplyForEvents extends Component{
 
   toggleApplyForEventWorkModal = (selectedEvent) => {
     if(!this.state.isOpenApplyForEventWork){
-      this.getSelectedEvent(selectedEvent);
+      this.getSelectedEvent(selectedEvent.eventId).then(res=>{this.setState({selectedEvent:res})}).then(
+        this.setState({
+
+          isOpenEventInfo: !this.state.isOpenEventInfo
+        }))
       this.setState({
         isOpenApplyForEventWork: !this.state.isOpenApplyForEventWork
       })
@@ -58,6 +62,14 @@ class ApplyForEvents extends Component{
       })
     }
   }
+
+  getSelectedEvent(selectedEvent){
+
+    return Axios.get('http://ellakk.zapto.org:5050/api/Events/'+selectedEvent).then(res =>
+      {
+        return res.data
+      })
+    }
 
   fetchEventInfoPublic(){
     return Axios.get('http://ellakk.zapto.org:5050/api/Events').then(res => {

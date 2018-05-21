@@ -8,23 +8,28 @@ class ApplyForEventModal extends Component{
     super(props)
 
     this.state ={
-      userRoleTitle: '',
-      userRoleDescription: '',
+
       eventRolesToApplyFor:[],
-      roleDescription:''
+      roleDescription:'',
+      userRoleId: null,
+      userRoleApplication: ''
     }
   }
 
-  componentDidMount(){
-    let roleDescription = '';
-    this.fetchEventRoles().then(res=>{
-      if(res.length != 0){
-        roleDescription = res[0].roleDescription
+  componentDidUpdate(prevProps, prevState, snapshot){
+    if(prevProps.event != this.props.event){
+      let roleDescription = '';
+      this.fetchEventRoles().then(res=>{
+        if(res.length != 0){
+          roleDescription = res[0].roleDescription
+        }
+        this.setState({
+          eventRolesToApplyFor: res,
+          roleDescription: roleDescription,
+          userRoleId: res[0].roleId
+        })})
       }
-      this.setState({
-        eventRolesToApplyFor: res,
-        roleDescription: roleDescription
-      })})
+
     }
 
     render(){
@@ -50,6 +55,14 @@ class ApplyForEventModal extends Component{
         padding: '0 auto'
       };
 
+      const cardStyle = {
+        width: 'auto',
+        backgroundColor: '#fff'
+      }
+
+      const eventStart = new Date(Date.parse(this.props.event.eventStart))
+      const eventEnd = new Date(Date.parse(this.props.event.eventEnd))
+
       return(
         <div className="backdrop" style={backdropStyle}>
           <div className="modal-dialog modal-lg" style={modalStyle}>
@@ -57,7 +70,7 @@ class ApplyForEventModal extends Component{
               <div className="container-fluid">
                 <div className="modal-header">
                   <div>
-                    <h2 className="modal-title"> Ansök till Event </h2>
+                    <h2 className="modal-title"> Ansök som Eventmedarbetare </h2>
                   </div>
                   <div>
                     <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
@@ -66,9 +79,54 @@ class ApplyForEventModal extends Component{
                   </div>
                 </div>
                 <div className="modal-body">
-                  {this.roleList(this.state.eventRolesToApplyFor)}
+                  <h2>{this.props.event.eventTitle}</h2>
+
+                  <div className="card bg-light mb-3" style = {cardStyle}>
+                    <div className="card-body">
+                      <h5 className="card-title">Event Beskrivning</h5>
+                      <div className="card-text mb-2">
+                        {this.props.event.eventDescription}
+                        <br/>
+                        {eventStart.toLocaleString("sv-SE")}
+                        <br/>
+                        {eventEnd.toLocaleString("sv-SE")}
+                      </div>
+                      <div>
+                        <h5 className="card-title">Adress</h5>
+                        <div className="card-text mb-2">
+                        {this.props.event.eventAdressCity}
+                        <br />
+                        {this.props.event.eventAdressStreet}
+                        <br />
+                        {this.props.event.eventAdressPostal}
+                        </div>
+                      </div>
+                      <div>
+                        <h5 className="card-title">Kontakt information</h5>
+                        {this.props.event.eventContactEmail}
+                        <br />
+                        {this.props.event.eventContactPhone}
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
-                    {this.state.roleDescription}
+                    {this.roleList(this.state.eventRolesToApplyFor)}
+                    <div>
+
+                      <h4>Roll Beskrivning</h4>
+                      <div className="card bg-light mb-3">
+                        <div className="card-body">
+                          <div className="card-text">
+                            {this.state.roleDescription}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4>Ansökningstext</h4>
+                      <textarea className="form-control" placeholder="Skriv en ansökan" id="userRoleApplication" value={this.state.userRoleApplication} onChange={this.handleTextChange} rows="3" style={{resize: 'none'}}></textarea>
+                    </div>
                   </div>
                 </div>
 
@@ -87,11 +145,11 @@ class ApplyForEventModal extends Component{
 
       Axios({
         method: 'post',
-        url: 'http://ellakk.zapto.org:5050/api/User/events/'+this.props.event.eventId+"/roles",
+        url: 'http://ellakk.zapto.org:5050/api/User/events/'+this.props.event.eventId,
         params:{userToken: sessionStorage.getItem("userToken")},
         data: {
-          userRoleTitle: this.state.userRoleTitle,
-          userRoleDescription: this.state.userRoleDescription
+          userRoleId: this.state.userRoleId,
+          userRoleApplication: this.state.userRoleApplication
         }
       });
 
@@ -110,7 +168,6 @@ class ApplyForEventModal extends Component{
     handleTextChange=(event) => {
       const name = event.target.id;
       const value = event.target.value;
-      console.log(event.target.value)
       this.setState({
         [name]: value
       });
@@ -118,11 +175,12 @@ class ApplyForEventModal extends Component{
     }
 
     handleRoleChange=(selectedRole)=>{
-      console.log("Hej")
-      console.log(selectedRole.target.value)
       this.state.eventRolesToApplyFor.forEach(obj=>{
         if(obj.roleTitle === selectedRole.target.value){
-          this.setState({roleDescription:obj.roleDescription})
+          this.setState({
+            roleDescription:obj.roleDescription,
+            userRoleId: obj.roleId
+          })
         }
       })
     }
@@ -135,7 +193,8 @@ class ApplyForEventModal extends Component{
       });
       return(
         <div>
-          <select onChange={this.handleRoleChange}>
+          <h4 htmlFor="roleSelect">Välj arbetsroll</h4>
+          <select class="form-control" id="roleSelect" onChange={this.handleRoleChange}>
             {roles}
           </select>
         </div>
