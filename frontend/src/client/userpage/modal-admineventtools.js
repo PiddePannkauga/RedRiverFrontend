@@ -23,6 +23,10 @@ class AdminEventToolsModal extends Component{
         return null;
       }
 
+      const event = this.props.event
+
+      const date = this.getStartEndFormatted(event);
+
       const backdropStyle = {
         position: 'fixed',
         top: 0,
@@ -58,7 +62,24 @@ class AdminEventToolsModal extends Component{
                 </div>
                 <div className="modal-body">
                   <div className="row">
-                  <div className="col-sm"></div>
+                  <div className="col-sm">
+                    <div className="Date">
+                      {date}
+                    </div>
+                    <div className="Location">
+                      {event.eventAdressStreet}
+                      ,&nbsp;
+                      {event.eventAdressCity}
+                    </div>
+                    <div className="Contact">
+                      {event.eventContactEmail}
+                    </div>
+                    <div className="Description mt-3">
+                      <h5>Beskrivning</h5>
+                      {event.eventDescription}
+                    </div>
+                  </div>
+                  </div>
                   <div className="col-sm">
                   <ul>
                     <li>
@@ -77,14 +98,29 @@ class AdminEventToolsModal extends Component{
                 </div>
 
                 <div className="modal-footer">
-                  <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> </button>
                 </div>
 
               </div>
             </div>
           </div>
-        </div>
+
       )
+    }
+
+    getStartEndFormatted(event) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+      const dateStart = new Date(Date.parse(event.eventStart));
+      const dateEnd = new Date(Date.parse(event.eventEnd));
+
+      var eventStart = dateStart.getDate() + ' ' + months[dateStart.getMonth()];
+      var eventEnd = dateEnd.getDate() + ' ' + months[dateEnd.getMonth()];
+
+      if(eventStart === eventEnd) {
+        eventEnd = dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
+      }
+      eventStart += ' ' + dateStart.getHours() + ':' + ('0' + dateStart.getMinutes()).slice(-2);
+
+      return eventStart + ' - ' + eventEnd;
     }
 
   }
