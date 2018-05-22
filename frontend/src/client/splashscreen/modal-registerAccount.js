@@ -17,7 +17,7 @@ class RegisterAccountModal extends Component{
       postal: '',
       mobilephone: 'naj',
       telephone: '',
-      description: ''
+      otherInfo: ''
     }
 
   }

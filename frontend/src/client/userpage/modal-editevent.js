@@ -8,7 +8,7 @@ class EditEventModal extends Component{
     super(props)
 
     this.state ={
-      eventTitle: '',
+      eventTitle: props.event.eventTitle,
       eventDescription: '',
       eventStart: '',
       eventEnd: '',
@@ -19,7 +19,6 @@ class EditEventModal extends Component{
       eventAdressPostal: '',
     }
   }
-
 
   render(){
     if(!this.props.show){
@@ -68,7 +67,7 @@ class EditEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventTitle"> Titel </label>
-                        <input type="text" className="form-control" id="eventTitle" value={this.state.eventTitle} onChange={this.handleTextChange} placeholder={this.props.event.eventTitle}/>
+                        <input type="text" className="form-control" id="eventTitle" value={this.state.eventTitle} onChange={this.handleTextChange} />
                       </div>
                     </div>
                   </div>
@@ -76,13 +75,13 @@ class EditEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventStart"> Event Start datum och tid </label>
-                        <input type="text" className="form-control" id="eventStart"value={this.state.eventStart} onChange={this.handleTextChange} placeholder={eventStart.toLocaleString()}></input>
+                        <input type="text" className="form-control" id="eventStart"value={this.state.eventStart} onChange={this.handleTextChange} placeholder={eventStart.toLocaleString("sv-SE")}></input>
                       </div>
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="eventEnd"> Event Slut datum och tid </label>
-                      <input type="address" className="form-control" id="eventEnd" value={this.state.street} onChange={this.handleTextChange}placeholder={eventEnd.toLocaleString()}/>
+                      <input type="address" className="form-control" id="eventEnd" value={this.state.street} onChange={this.handleTextChange}placeholder={eventEnd.toLocaleString("sv-SE")}/>
                     </div>
                   </div>
 
@@ -134,7 +133,7 @@ class EditEventModal extends Component{
             </div>
           </div>
         </div>
-      </div>  
+      </div>
     )
   }
 

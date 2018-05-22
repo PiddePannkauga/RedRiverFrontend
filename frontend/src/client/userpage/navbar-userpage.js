@@ -12,7 +12,6 @@ const UserPageNavbar = (props) =>{
         <div className="navbar-nav">
           <a className="nav-link"  onClick={props.onClick} id="myEvents">Mina Event</a>
           <a className="nav-link" onClick={props.onClick} id="applyEvent">Ansök till Event</a>
-          <a className="nav-link" onClick={props.onClick} id="settings">Inställningar</a>
           <a className="nav-link" onClick={props.onClick} id="profile">Profil</a>
         </div>
       </div>

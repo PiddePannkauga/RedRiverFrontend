@@ -3,9 +3,12 @@ import EventFinder from '../eventfinder/eventinfo-display';
 import {EventFinderContext} from '../../providers/provider-eventfinder';
 import SearchBar from '../../components/searchbar';
 import EventWorkInfoModal from './modal-eventworkinfo';
-import UserPageNavbar from './userpageNavbar';
+import UserPageNavbar from './navbar-userpage';
 import MyEvents from './myevents';
 import MyCreatedEvents from './mycreatedEvents';
+import ApplyForEvents from './applyforevents';
+import UserProfile from './userprofile'
+
 import Axios from 'axios';
 import {Route, Redirect } from 'react-router-dom';
 
@@ -45,8 +48,8 @@ class UserPage extends Component{
         <UserPageNavbar onClick={this.handleNavChange} logout={this.logout}/>
 
         {this.state.conditionalUserPageRender === "myEvents" && <MyEvents isAdmin={this.state.isAdmin}/>}
-
-
+        {this.state.conditionalUserPageRender === "applyEvent" && <ApplyForEvents />}
+        {this.state.conditionalUserPageRender === "profile" && <UserProfile />}
 
       </div>
     )
