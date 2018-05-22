@@ -87,6 +87,8 @@ class EventInfoModal extends Component{
 
     if(eventStart === eventEnd) {
       eventEnd = dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
+    }else{
+    eventEnd += ' ' + dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
     }
     eventStart += ' ' + dateStart.getHours() + ':' + ('0' + dateStart.getMinutes()).slice(-2);
 

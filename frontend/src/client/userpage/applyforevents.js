@@ -4,6 +4,7 @@ import ApplyForEventWorkModal from './modal-applyforeventwork';
 import SearchBar from '../../components/searchbar';
 import Axios from 'axios';
 
+
 class ApplyForEvents extends Component{
 
   constructor(props) {
@@ -22,8 +23,15 @@ class ApplyForEvents extends Component{
   }
 
   render(){
+
+    const containerStyle = {
+
+      minHeight: '100vh',
+      minWidth: '100vw'
+    }
+
     return(
-      <div>
+      <div className="container" style={containerStyle}>
       <SearchBar onChange={this.searchTermChange}/>
       <EventFinder events={this.state.applicationEvents} searchTerm={this.state.searchTerm} onClick={this.toggleApplyForEventWorkModal}/>
       {this.state.isOpenApplyForEventWork && <ApplyForEventWorkModal event={this.state.selectedEvent} show={this.state.isOpenApplyForEventWork} onClose={this.toggleApplyForEventWorkModal}/>}

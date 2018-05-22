@@ -12,11 +12,16 @@ class EventInfoItem extends Component{
 
     const date = this.getStartEndFormatted(event);
 
+    const eventStart = new Date(Date.parse(this.props.events.eventStart))
+    const eventEnd = new Date(Date.parse(this.props.events.eventEnd))
+
     const cardStyle = {
       padding: 5,
-      margin: 5,
+      margin: 'auto',
       borderRadius: 5,
       boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+      width: '75%',
+      height: '150px',
       transition: '0.3s',
     };
 
@@ -60,6 +65,8 @@ class EventInfoItem extends Component{
 
     if(eventStart === eventEnd) {
       eventEnd = dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
+    }else{
+    eventEnd += ' ' + dateEnd.getHours() + ':' + ('0' + dateEnd.getMinutes()).slice(-2);
     }
     eventStart += ' ' + dateStart.getHours() + ':' + ('0' + dateStart.getMinutes()).slice(-2);
 

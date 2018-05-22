@@ -19,14 +19,16 @@ class ApplyForEventModal extends Component{
   componentDidUpdate(prevProps, prevState, snapshot){
     if(prevProps.event != this.props.event){
       let roleDescription = '';
+      let roleId = '';
       this.fetchEventRoles().then(res=>{
         if(res.length != 0){
           roleDescription = res[0].roleDescription
+          roleId = res[0].roleId
         }
         this.setState({
           eventRolesToApplyFor: res,
           roleDescription: roleDescription,
-          userRoleId: res[0].roleId
+          userRoleId: roleId
         })})
       }
 
@@ -87,9 +89,10 @@ class ApplyForEventModal extends Component{
                       <div className="card-text mb-2">
                         {this.props.event.eventDescription}
                         <br/>
-                        {eventStart.toLocaleString("sv-SE")}
+                        <h5 className="mt-2">Datum/tid</h5>
+                        Start: {eventStart.toLocaleString("sv-SE")}
                         <br/>
-                        {eventEnd.toLocaleString("sv-SE")}
+                        Slut: {eventEnd.toLocaleString("sv-SE")}
                       </div>
                       <div>
                         <h5 className="card-title">Adress</h5>
@@ -114,7 +117,7 @@ class ApplyForEventModal extends Component{
                     {this.roleList(this.state.eventRolesToApplyFor)}
                     <div>
 
-                      <h4>Roll Beskrivning</h4>
+                      <h4>Rollbeskrivning</h4>
                       <div className="card bg-light mb-3">
                         <div className="card-body">
                           <div className="card-text">
