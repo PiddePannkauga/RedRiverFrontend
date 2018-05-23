@@ -61,7 +61,7 @@ class CreateEventModal extends Component{
               <div className="modal-body">
                 <form>
                   <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                       <div className="form-group">
                         <label htmlFor="eventTitle"> Titel </label>
                         <input type="text" className="form-control" id="eventTitle" value={this.state.eventTitle} onChange={this.handleTextChange} placeholder="Ange event titel"/>
@@ -72,16 +72,16 @@ class CreateEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventStart"> Event Start datum och tid </label>
-                        <input type="text" className="form-control" id="eventStart"value={this.state.eventStart} onChange={this.handleTextChange} placeholder="Ange ÅÅÅÅ-MM-DD 19:00"></input>
+                        <input type="text" className="form-control" id="eventStart" value={this.state.eventStart} onChange={this.handleTextChange} placeholder="Ange ÅÅÅÅ-MM-DD 19:00"></input>
                       </div>
                     </div>
-
-                    <div className="form-group">
-                      <label htmlFor="eventEnd"> Event Slut datum och tid </label>
-                      <input type="address" className="form-control" id="eventEnd" value={this.state.street} onChange={this.handleTextChange}placeholder="Ange ÅÅÅÅ-MM-DD 19:00"/>
+                    <div className="col-sm-6">
+                      <div className="form-group">
+                        <label htmlFor="eventEnd"> Event Slut datum och tid </label>
+                        <input type="text" className="form-control" id="eventEnd" value={this.state.street} onChange={this.handleTextChange} placeholder="Ange ÅÅÅÅ-MM-DD 19:00"></input>
+                      </div>
                     </div>
                   </div>
-
 
                   <div className="row">
                     <div className="col-sm-6">

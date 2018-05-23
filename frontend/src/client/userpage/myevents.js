@@ -43,7 +43,6 @@ class MyEvents extends Component{
       })
     }else{
       this.setState({
-        selectedEvent: {},
         isOpenMyEventModal: !this.state.isOpenMyEventModal
       })
     }

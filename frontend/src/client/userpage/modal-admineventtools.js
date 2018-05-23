@@ -1,5 +1,3 @@
-//Modal som innehåller eventInfo och verktyg för event. Verktyg innehåller (
-// Lista över deltagare, ansökningar och uppdatera eventInfo.
 import React,{Component} from 'react';
 import Axios from 'axios';
 
@@ -14,7 +12,7 @@ class AdminEventToolsModal extends Component{
     }
   }
 
-  componentDidMount(){
+  componentDidUpdate(){
 
   }
 
@@ -42,19 +40,16 @@ class AdminEventToolsModal extends Component{
       backgroundColor: '#fff',
       borderRadius: 5,
       margin: '0 auto',
-      padding: '0 auto'
+      padding: '0 auto',
     };
 
     return(
       <div className="backdrop" style={backdropStyle}>
-        <div className="modal-dialog modal-lg" style={modalStyle}>
+        <div className="modal-dialog modal-dialog-centered" >
           <div className="modal-content">
-
-              <div className="modal-header">
-                <div>
-                  <h2 className="modal-title"> Eventadmininstrations Panel </h2>
-                </div>
-                <div>
+            <div className="container-fluid">
+              <div className="modal-header" >
+                  <h3 className="modal-title">Administrera Event</h3>
                   <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -62,14 +57,14 @@ class AdminEventToolsModal extends Component{
               </div>
               <div className="modal-body">
                 <div className="row justify-content-center mb-3">
-                  <div className="col-3">
-                    <button className="btn btn-primary w-100" onClick={this.props.onParticipant}>Deltagare</button>
+                  <div className="col-12">
+                    <button className="btn btn-primary w-auto mb-2" onClick={this.props.onParticipant}>Deltagare</button>
                   </div>
-                  <div className="col-3">
-                    <button className="btn btn-primary w-100" onClick={this.props.onEventWork}>Eventmedarbetare</button>
+                  <div className="col-12">
+                    <button className="btn btn-primary w-auto mb-2" onClick={this.props.onEventWork}>Eventmedarbetare</button>
                   </div>
-                  <div className="col-3">
-                    <button className="btn btn-primary w-100" onClick={this.props.onEdit}>Uppdatera Event</button>
+                  <div className="col-12">
+                    <button className="btn btn-primary w-auto mb-2" onClick={this.props.onEdit}>Uppdatera Event</button>
                   </div>
 
                 </div>
@@ -102,7 +97,6 @@ class AdminEventToolsModal extends Component{
                     </div>
                   </div>
                 </div>
-
               </div>
 
 
