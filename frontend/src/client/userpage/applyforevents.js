@@ -24,13 +24,8 @@ class ApplyForEvents extends Component{
 
   render(){
 
-    const containerStyle = {
-      minHeight: '100vh',
-      minWidth: '100vw'
-    }
-
     return(
-      <div className="container" style={containerStyle}>
+      <div className="container">
       <SearchBar onChange={this.searchTermChange}/>
       <EventFinder events={this.state.applicationEvents} searchTerm={this.state.searchTerm} onClick={this.toggleApplyForEventWorkModal}/>
       {this.state.isOpenApplyForEventWork && <ApplyForEventWorkModal event={this.state.selectedEvent} show={this.state.isOpenApplyForEventWork} onClose={this.toggleApplyForEventWorkModal}/>}
