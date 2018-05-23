@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import Logo from '../../components/logo';
 import EventFinder from '../eventfinder/eventinfo-display';
 import SearchBar from '../../components/searchbar';
-import Button from '../../components/button'
-import DropDown from '../../components/dropdown';
 import LoginModal from './modal-login';
 import RegisterAccountModal from './modal-registerAccount';
 import EventInfoModal from './modal-eventinfo';

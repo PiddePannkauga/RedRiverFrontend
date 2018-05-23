@@ -169,12 +169,12 @@ class EditEventModal extends Component{
 
     let updatedEventJSON = '{';
 
-    eventUpdateCheck.forEach(eventString =>{
-      if(this.state[eventString]){
+    eventUpdateCheck.forEach(stateName =>{
+      if(this.state[stateName]){
         if(updatedEventJSON.length>1){
           updatedEventJSON += ' ,'
         }
-        updatedEventJSON += '"'+eventString+'"'+': '+ '"'+this.state[eventString]+'"'
+        updatedEventJSON += '"'+stateName+'"'+': '+ '"'+this.state[stateName]+'"'
 
       }
     })

@@ -83,7 +83,7 @@ class ApplyForEventModal extends Component{
                 <div className="modal-body">
                   <h2>{this.props.event.eventTitle}</h2>
 
-                  <div className="card bg-light mb-3" style = {cardStyle}>
+                  <div className="card bg-light mb-3" style={cardStyle}>
                     <div className="card-body">
                       <h5 className="card-title">Event Beskrivning</h5>
                       <div className="card-text mb-2">

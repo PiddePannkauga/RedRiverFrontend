@@ -21,7 +21,7 @@ class EventInfoItem extends Component{
       borderRadius: 5,
       boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
       width: '75%',
-      height: '150px',
+      height: '75%',
       overflow: 'hidden',
       textoverflow: 'ellipsis',
       transition: '0.3s',
