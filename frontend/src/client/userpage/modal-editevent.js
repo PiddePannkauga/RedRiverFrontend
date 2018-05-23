@@ -6,17 +6,18 @@ import Axios from 'axios';
 class EditEventModal extends Component{
   constructor(props){
     super(props)
-
+    const eventStart = new Date(Date.parse(props.event.eventStart))
+    const eventEnd = new Date(Date.parse(props.event.eventEnd))
     this.state ={
       eventTitle: props.event.eventTitle,
-      eventDescription: '',
-      eventStart: '',
-      eventEnd: '',
-      eventContactPhone: '',
-      eventContactEmail: '',
-      eventAdressCity: '',
-      eventAdressStreet: '',
-      eventAdressPostal: '',
+      eventDescription: props.event.eventDescription,
+      eventStart: eventStart.toLocaleString("sv-SE"),
+      eventEnd: eventEnd.toLocaleString("sv-SE"),
+      eventContactPhone: props.event.eventContactPhone,
+      eventContactEmail: props.event.eventContactEmail,
+      eventAdressCity: props.event.eventAdressCity,
+      eventAdressStreet: props.event.eventAdressStreet,
+      eventAdressPostal: props.event.eventAdressPostal,
     }
   }
 
@@ -25,8 +26,7 @@ class EditEventModal extends Component{
       return null;
     }
 
-    const eventStart = new Date(Date.parse(this.props.event.eventStart))
-    const eventEnd = new Date(Date.parse(this.props.event.eventEnd))
+
 
     const backdropStyle = {
       position: 'fixed',
@@ -75,14 +75,15 @@ class EditEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventStart"> Event Start datum och tid </label>
-                        <input type="text" className="form-control" id="eventStart"value={this.state.eventStart} onChange={this.handleTextChange} placeholder={eventStart.toLocaleString("sv-SE")}></input>
+                        <input type="text" className="form-control" id="eventStart"value={this.state.eventStart} onChange={this.handleTextChange}></input>
                       </div>
                     </div>
-
+                    <div className="col-sm-6">
                     <div className="form-group">
                       <label htmlFor="eventEnd"> Event Slut datum och tid </label>
-                      <input type="address" className="form-control" id="eventEnd" value={this.state.street} onChange={this.handleTextChange}placeholder={eventEnd.toLocaleString("sv-SE")}/>
+                      <input type="address" className="form-control" id="eventEnd" value={this.state.eventEnd} onChange={this.handleTextChange}/>
                     </div>
+                  </div>
                   </div>
 
 
@@ -90,13 +91,13 @@ class EditEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventContactPhone">Telefonnummer </label>
-                        <input type="text" className="form-control" id="eventContactPhone" value={this.state.eventContactPhone} onChange={this.handleTextChange} placeholder={this.props.event.eventContactPhone}/>
+                        <input type="text" className="form-control" id="eventContactPhone" value={this.state.eventContactPhone} onChange={this.handleTextChange} />
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventContactEmail"> Email </label>
-                        <input type="email" className="form-control" id="eventContactEmail"  value={this.state.eventContactEmail} onChange={this.handleTextChange}placeholder={this.props.event.eventContactEmail}></input>
+                        <input type="email" className="form-control" id="eventContactEmail"  value={this.state.eventContactEmail} onChange={this.handleTextChange}></input>
                       </div>
                     </div>
                   </div>
@@ -104,25 +105,25 @@ class EditEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventAdressCity"> Stad </label>
-                        <input type="text" className="form-control" id="eventAdressCity" value={this.state.eventAdressCity} onChange={this.handleTextChange} placeholder={this.props.event.eventAdressCity}/>
+                        <input type="text" className="form-control" id="eventAdressCity" value={this.state.eventAdressCity} onChange={this.handleTextChange} />
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventAdressStreet"> Adress </label>
-                        <input type="text" className="form-control" id="eventAdressStreet"value={this.state.eventAdressStreet} onChange={this.handleTextChange} placeholder={this.props.event.eventAdressStreet}></input>
+                        <input type="text" className="form-control" id="eventAdressStreet"value={this.state.eventAdressStreet} onChange={this.handleTextChange} ></input>
                       </div>
                     </div>
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventAdressPostal"> Postnummer </label>
-                        <input type="number" className="form-control" id="eventAdressPostal"value={this.state.eventAdressPostal} onChange={this.handleTextChange} placeholder={this.props.event.eventAdressPostal}></input>
+                        <input type="number" className="form-control" id="eventAdressPostal"value={this.state.eventAdressPostal} onChange={this.handleTextChange} ></input>
                       </div>
                     </div>
                   </div>
                   <div className="form-group">
                     <label htmlFor="eventDescription"><h5 className="mt-2"> Event Beskrivning </h5></label>
-                    <textarea className="form-control" id="eventDescription" value={this.state.eventDescription} onChange={this.handleTextChange} placeholder={this.props.event.eventDescription} rows="3" style={{resize: 'none'}}></textarea>
+                    <textarea className="form-control" id="eventDescription" value={this.state.eventDescription} onChange={this.handleTextChange} rows="3" style={{resize: 'none'}}></textarea>
                   </div>
                 </form>
               </div>
