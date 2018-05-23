@@ -20,6 +20,7 @@ class MyCreatedEvents extends Component{
       isOpenEventWorkRegistration: false,
       isOpenParticipantList: false,
       isOpenCreateEvent: false,
+      eventEdited: false
     }
   }
 
@@ -28,117 +29,120 @@ class MyCreatedEvents extends Component{
   }
 
   componentDidUpdate(prevProps, prevState, snapshot){
-    if(this.state.adminCreatedEvents === prevState.adminCreatedEvents){
-      this.fetchAdminCreatedEvents().then(res=>{
-        this.setState({adminCreatedEvents:res})
-        if(this.state.selectedEvent.eventId){
-          this.setState({selectedEvent:res.find((obj)=> {
-            return obj.eventId === this.state.selectedEvent.eventId})})
-          }
-        })
-
-      }
-    }
-
-    render(){
-      return(
-        <div>
-          <button className="btn btn-primary" onClick={this.toggleCreateEvent}>Skapa Event</button>
-          <h2>Mina Skapade Event</h2>
-          <EventFinder events={this.state.adminCreatedEvents} onClick={this.toggleAdminEventModal}/>
-          {this.state.isOpenEditEventModal &&
-            <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />}
-            {this.state.isOpenAdminEventModal &&
-              <AdminEventToolsModal event={this.state.selectedEvent} show={this.state.isOpenAdminEventModal} onClose={this.toggleAdminEventModal} onEdit={this.toggleEditEventModal} onEventWork={this.toggleEventWorkRegistrationModal} onParticipant={this.toggleParticipantListModal}/>}
-              <EventWorkRegistrationModal event={this.state.selectedEvent} show={this.state.isOpenEventWorkRegistration} onClose={this.toggleEventWorkRegistrationModal}/>
-              {this.state.isOpenParticipantList &&
-                <ParticipantListModal event={this.state.selectedEvent} show={this.state.isOpenParticipantList} onClose={this.toggleParticipantListModal}/>}
-                <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
-
-              </div>
-
-            )
-          }
-
-          toggleCreateEvent = () =>{
-            this.setState({
-              isOpenCreateEvent: !this.state.isOpenCreateEvent
-            })
-          }
-
-          toggleEditEventModal = () => {
-            if(!this.state.isOpenEditEventModal){
-              this.setState({
-                isOpenEditEventModal: !this.state.isOpenEditEventModal,
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal
-              })
-            }else{
-              this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
-              this.setState({
-                isOpenEditEventModal: !this.state.isOpenEditEventModal,
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal
-              })
-            }
-          }
-
-          toggleEventWorkRegistrationModal = () => {
-            if(!this.state.isOpenEventWorkRegistration){
-              this.setState({
-                isOpenEventWorkRegistration: !this.state.isOpenEventWorkRegistration,
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal
-              })
-            }else{
-              this.setState({
-                isOpenEventWorkRegistration: !this.state.isOpenEventWorkRegistration,
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal
-              })
-            }
-          }
-
-          toggleParticipantListModal = () => {
-            if(!this.state.isOpenEventWorkRegistration){
-              this.setState({
-                isOpenParticipantList: !this.state.isOpenParticipantList,
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal
-              })
-            }else{
-              this.setState({
-                isOpenParticipantList: !this.state.isOpenParticipantList,
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal
-              })
-            }
-          }
-
-          toggleAdminEventModal = (selectedEvent) => {
-            if(!this.state.isOpenAdminEventModal){
-              this.getSelectedEvent(selectedEvent);
-              this.setState({
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal,
-              })
-            }else{
-              this.setState({
-
-                isOpenAdminEventModal: !this.state.isOpenAdminEventModal
-              })
-            }
-          }
-
-          getSelectedEvent(selectedEvent){
-            this.state.adminCreatedEvents.forEach((obj)=>{
-              if(selectedEvent.eventId === obj.eventId)
-
-              this.setState({selectedEvent: obj})
-              return
-            })
-          }
-
-          fetchAdminCreatedEvents(){
-            return Axios.get("http://ellakk.zapto.org:5050/api/Admin/events",{
-              params:{ userToken: sessionStorage.getItem('userToken')}
-            }).then(res=>{
-              return res.data
+    if(this.state.eventEdited){
+      if(this.state.adminCreatedEvents === prevState.adminCreatedEvents){
+        this.fetchAdminCreatedEvents().then(res=>{
+          this.setState({adminCreatedEvents:res,
+            eventEdited: false})
+            if(this.state.selectedEvent.eventId){
+              this.setState({selectedEvent:res.find((obj)=> {
+                return obj.eventId === this.state.selectedEvent.eventId})})
+              }
             })
           }
         }
+      }
 
-        export default MyCreatedEvents;
+      render(){
+        return(
+          <div>
+            <button className="btn btn-primary" onClick={this.toggleCreateEvent}>Skapa Event</button>
+            <h2>Mina Skapade Event</h2>
+            <EventFinder events={this.state.adminCreatedEvents} onClick={this.toggleAdminEventModal}/>
+            {this.state.isOpenEditEventModal &&
+              <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />}
+              {this.state.isOpenAdminEventModal &&
+                <AdminEventToolsModal event={this.state.selectedEvent} show={this.state.isOpenAdminEventModal} onClose={this.toggleAdminEventModal} onEdit={this.toggleEditEventModal} onEventWork={this.toggleEventWorkRegistrationModal} onParticipant={this.toggleParticipantListModal}/>}
+                <EventWorkRegistrationModal event={this.state.selectedEvent} show={this.state.isOpenEventWorkRegistration} onClose={this.toggleEventWorkRegistrationModal}/>
+                {this.state.isOpenParticipantList &&
+                  <ParticipantListModal event={this.state.selectedEvent} show={this.state.isOpenParticipantList} onClose={this.toggleParticipantListModal}/>}
+                  <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
+
+                </div>
+
+              )
+            }
+
+            toggleCreateEvent = () =>{
+              this.setState({
+                isOpenCreateEvent: !this.state.isOpenCreateEvent
+              })
+            }
+
+            toggleEditEventModal = () => {
+              if(!this.state.isOpenEditEventModal){
+                this.setState({
+                  isOpenEditEventModal: !this.state.isOpenEditEventModal,
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal
+                })
+              }else{
+                this.fetchAdminCreatedEvents().then(res=>{this.setState({adminCreatedEvents:res})})
+                this.setState({
+                  eventEdited: true,
+                  isOpenEditEventModal: !this.state.isOpenEditEventModal,
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal
+                })
+              }
+            }
+
+            toggleEventWorkRegistrationModal = () => {
+              if(!this.state.isOpenEventWorkRegistration){
+                this.setState({
+                  isOpenEventWorkRegistration: !this.state.isOpenEventWorkRegistration,
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal
+                })
+              }else{
+                this.setState({
+                  isOpenEventWorkRegistration: !this.state.isOpenEventWorkRegistration,
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal
+                })
+              }
+            }
+
+            toggleParticipantListModal = () => {
+              if(!this.state.isOpenEventWorkRegistration){
+                this.setState({
+                  isOpenParticipantList: !this.state.isOpenParticipantList,
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal
+                })
+              }else{
+                this.setState({
+                  isOpenParticipantList: !this.state.isOpenParticipantList,
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal
+                })
+              }
+            }
+
+            toggleAdminEventModal = (selectedEvent) => {
+              if(!this.state.isOpenAdminEventModal){
+                this.getSelectedEvent(selectedEvent);
+                this.setState({
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal,
+                })
+              }else{
+                this.setState({
+
+                  isOpenAdminEventModal: !this.state.isOpenAdminEventModal
+                })
+              }
+            }
+
+            getSelectedEvent(selectedEvent){
+              this.state.adminCreatedEvents.forEach((obj)=>{
+                if(selectedEvent.eventId === obj.eventId)
+
+                this.setState({selectedEvent: obj})
+                return
+              })
+            }
+
+            fetchAdminCreatedEvents(){
+              return Axios.get("http://ellakk.zapto.org:5050/api/Admin/events",{
+                params:{ userToken: sessionStorage.getItem('userToken')}
+              }).then(res=>{
+                return res.data
+              })
+            }
+          }
+
+          export default MyCreatedEvents;

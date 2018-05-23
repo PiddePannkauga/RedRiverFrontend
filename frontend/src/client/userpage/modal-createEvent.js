@@ -169,9 +169,9 @@ class CreateEventModal extends Component{
     )
   }
 
-  sendRegistration = () =>{
+  sendRegistration=()=>{
 
-    Axios({
+  const promise = Promise.resolve(Axios({
       method: 'post',
       url: 'http://ellakk.zapto.org:5050/api/Admin/events/create',
       params:{userToken: sessionStorage.getItem("userToken")},
@@ -186,8 +186,14 @@ class CreateEventModal extends Component{
         eventAdressStreet: this.state.eventAdressStreet,
         eventAdressPostal: this.state.eventAdressPostal
       }
-    });
-    this.props.onClose()
+    }).then(res => {
+      return res.data.eventId
+    }))
+
+    promise.then((value) =>{
+      this.setState({createdEventId: value})
+    })
+
   }
 
   addRole = () =>{

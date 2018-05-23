@@ -7,12 +7,6 @@ class AdminEventToolsModal extends Component{
   constructor(props){
     super(props)
 
-    this.state ={
-
-    }
-  }
-
-  componentDidUpdate(){
 
   }
 

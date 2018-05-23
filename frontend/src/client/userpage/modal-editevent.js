@@ -18,6 +18,8 @@ class EditEventModal extends Component{
       eventAdressCity: props.event.eventAdressCity,
       eventAdressStreet: props.event.eventAdressStreet,
       eventAdressPostal: props.event.eventAdressPostal,
+      userRoleTitle: '',
+      userRoleDescription: ''
     }
   }
 
@@ -79,11 +81,11 @@ class EditEventModal extends Component{
                       </div>
                     </div>
                     <div className="col-sm-6">
-                    <div className="form-group">
-                      <label htmlFor="eventEnd"> Event Slut datum och tid </label>
-                      <input type="address" className="form-control" id="eventEnd" value={this.state.eventEnd} onChange={this.handleTextChange}/>
+                      <div className="form-group">
+                        <label htmlFor="eventEnd"> Event Slut datum och tid </label>
+                        <input type="address" className="form-control" id="eventEnd" value={this.state.eventEnd} onChange={this.handleTextChange}/>
+                      </div>
                     </div>
-                  </div>
                   </div>
 
 
@@ -126,8 +128,28 @@ class EditEventModal extends Component{
                     <textarea className="form-control" id="eventDescription" value={this.state.eventDescription} onChange={this.handleTextChange} rows="3" style={{resize: 'none'}}></textarea>
                   </div>
                 </form>
+                <form>
+                  <h4 className="mb-3">Lägg till roll </h4>
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div className="form-group">
+                        <label htmlFor="userRoleTitle"> Rolltitel </label>
+                        <input type="text" className="form-control" id="userRoleTitle" value={this.state.userRoleTitle} onChange={this.handleTextChange} placeholder="Ange roll titel"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div className="form-group">
+                        <label htmlFor="userRoleDescription"> Rollbeskrivning </label>
+                        <textarea type="text" className="form-control" id="userRoleDescription" value={this.state.userRoleDescription} onChange={this.handleTextChange} placeholder="Ange roll beskrivning"/>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
               <div className="modal-footer">
+                <button className="btn btn-primary" onClick={this.addRole}> Lägg till roll </button>
                 <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Uppdatera </button>
               </div>
 
@@ -154,45 +176,61 @@ class EditEventModal extends Component{
 
   }
 
+  addRole = () =>{
+    Axios({
+      method: 'post',
+      url: 'http://ellakk.zapto.org:5050/api/Admin/events/'+this.props.event.eventId+'/roles',
+      params:{userToken: sessionStorage.getItem("userToken")},
+      data: {
+        userRoleTitle: this.state.userRoleTitle,
+        userRoleDescription: this.state.userRoleDescription
+      }
+    });
+    this.setState({userRoleTitle: '',
+                  userRoleDescription: ''
+    })
+
+  }
+
 
   checkUpdatedEventFields(){
     const eventUpdateCheck = [
-    'eventTitle',
-    'eventDescription',
-    'eventStart',
-    'eventEnd',
-    'eventContactPhone',
-    'eventContactEmail',
-    'eventAdressCity',
-    'eventAdressStreet',
-    'eventAdressPostal']
+      'eventTitle',
+      'eventDescription',
+      'eventStart',
+      'eventEnd',
+      'eventContactPhone',
+      'eventContactEmail',
+      'eventAdressCity',
+      'eventAdressStreet',
+      'eventAdressPostal']
 
-    let updatedEventJSON = '{';
+      let updatedEventJSON = '{';
 
-    eventUpdateCheck.forEach(stateName =>{
-      if(this.state[stateName]){
-        if(updatedEventJSON.length>1){
-          updatedEventJSON += ' ,'
+      eventUpdateCheck.forEach(stateName =>{
+        if(this.state[stateName]){
+          if(updatedEventJSON.length>1){
+            updatedEventJSON += ' ,'
+          }
+          updatedEventJSON += '"'+stateName+'"'+': '+ '"'+this.state[stateName]+'"'
+
         }
-        updatedEventJSON += '"'+stateName+'"'+': '+ '"'+this.state[stateName]+'"'
+      })
+      updatedEventJSON += '}';
 
-      }
-    })
-    updatedEventJSON += '}';
+      return updatedEventJSON;
+    }
 
-    return updatedEventJSON;
+    handleTextChange=(event) => {
+      const name = event.target.id;
+      const value = event.target.value;
+
+      this.setState({
+        [name]:value
+      });
+
+    }
+
   }
 
-  handleTextChange=(event) => {
-    const name = event.target.id;
-    const value = event.target.value;
-
-    this.setState({
-      [name]:value
-    });
-
-  }
-
-}
-
-export default EditEventModal;
+  export default EditEventModal;
