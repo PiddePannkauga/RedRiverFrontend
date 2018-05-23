@@ -22,6 +22,8 @@ class EventInfoItem extends Component{
       boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
       width: '75%',
       height: '150px',
+      overflow: 'hidden',
+      textoverflow: 'ellipsis',
       transition: '0.3s',
     };
 
@@ -47,12 +49,21 @@ class EventInfoItem extends Component{
               </div>
             </div>
             <div className="Description mt-2">
-              {event.eventDescription}
+              {this.truncate(event.eventDescription.toString())}
             </div>
           </div>
         </div>
       </div>
     )
+  }
+
+
+  truncate = (s) =>{
+    if (s.length > 150){
+         return s.substring(0,150) + '...';
+      }else{
+         return s;
+      }
   }
 
   getStartEndFormatted(event) {

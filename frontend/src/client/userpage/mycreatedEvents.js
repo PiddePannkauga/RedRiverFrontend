@@ -43,7 +43,8 @@ class MyCreatedEvents extends Component{
         <EditEventModal event={this.state.selectedEvent} show={this.state.isOpenEditEventModal} onClose={this.toggleEditEventModal} />}
         <AdminEventToolsModal event={this.state.selectedEvent} show={this.state.isOpenAdminEventModal} onClose={this.toggleAdminEventModal} onEdit={this.toggleEditEventModal} onEventWork={this.toggleEventWorkRegistrationModal} onParticipant={this.toggleParticipantListModal}/>
         <EventWorkRegistrationModal event={this.state.selectedEvent} show={this.state.isOpenEventWorkRegistration} onClose={this.toggleEventWorkRegistrationModal}/>
-        <ParticipantListModal event={this.state.selectedEvent} show={this.state.isOpenParticipantList} onClose={this.toggleParticipantListModal}/>
+        {this.state.isOpenParticipantList &&
+        <ParticipantListModal event={this.state.selectedEvent} show={this.state.isOpenParticipantList} onClose={this.toggleParticipantListModal}/>}
         <CreateEventModal show={this.state.isOpenCreateEvent} onClose={this.toggleCreateEvent}/>
 
       </div>

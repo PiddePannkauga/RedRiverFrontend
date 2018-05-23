@@ -197,7 +197,7 @@ class ApplyForEventModal extends Component{
       return(
         <div>
           <h4 htmlFor="roleSelect">Välj arbetsroll</h4>
-          <select class="form-control" id="roleSelect" onChange={this.handleRoleChange}>
+          <select className="form-control" id="roleSelect" onChange={this.handleRoleChange}>
             {roles}
           </select>
         </div>
