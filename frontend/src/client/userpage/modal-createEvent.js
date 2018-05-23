@@ -16,7 +16,10 @@ class CreateEventModal extends Component{
       eventContactEmail: '',
       eventAdressCity: '',
       eventAdressStreet: '',
-      eventAdressPostal: ''
+      eventAdressPostal: '',
+      createdEventId: '',
+      userRoleTitle: '',
+      userRoleDescription: ''
     }
   }
 
@@ -50,7 +53,10 @@ class CreateEventModal extends Component{
             <div className="container-fluid">
               <div className="modal-header">
                 <div>
-                  <h2 className="modal-title"> Skapa Event </h2>
+                  {!this.state.createdEventId&&
+                    <h2 className="modal-title"> Skapa Event </h2>}
+                  {this.state.createdEventId&&
+                    <h2 className="modal-title"> Lägg till roller </h2>}
                 </div>
                 <div>
                   <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
@@ -59,9 +65,10 @@ class CreateEventModal extends Component{
                 </div>
               </div>
               <div className="modal-body">
-                <form>
+                {!this.state.createdEventId &&
+                  <form>
                   <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                       <div className="form-group">
                         <label htmlFor="eventTitle"> Titel </label>
                         <input type="text" className="form-control" id="eventTitle" value={this.state.eventTitle} onChange={this.handleTextChange} placeholder="Ange event titel"/>
@@ -72,16 +79,16 @@ class CreateEventModal extends Component{
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label htmlFor="eventStart"> Event Start datum och tid </label>
-                        <input type="text" className="form-control" id="eventStart"value={this.state.eventStart} onChange={this.handleTextChange} placeholder="Ange ÅÅÅÅ-MM-DD 19:00"></input>
+                        <input type="text" className="form-control" id="eventStart" value={this.state.eventStart} onChange={this.handleTextChange} placeholder="Ange ÅÅÅÅ-MM-DD 19:00"></input>
                       </div>
                     </div>
-
-                    <div className="form-group">
-                      <label htmlFor="eventEnd"> Event Slut datum och tid </label>
-                      <input type="address" className="form-control" id="eventEnd" value={this.state.street} onChange={this.handleTextChange}placeholder="Ange ÅÅÅÅ-MM-DD 19:00"/>
+                    <div className="col-sm-6">
+                      <div className="form-group">
+                        <label htmlFor="eventEnd"> Event Slut datum och tid </label>
+                        <input type="text" className="form-control" id="eventEnd" value={this.state.street} onChange={this.handleTextChange} placeholder="Ange ÅÅÅÅ-MM-DD 19:00"></input>
+                      </div>
                     </div>
                   </div>
-
 
                   <div className="row">
                     <div className="col-sm-6">
@@ -122,22 +129,49 @@ class CreateEventModal extends Component{
                     <textarea className="form-control" id="eventDescription" value={this.state.eventDescription} onChange={this.handleTextChange} rows="3" style={{resize: 'none'}}></textarea>
                   </div>
                 </form>
-              </div>
+              }
 
+              {this.state.createdEventId &&
+                <form>
+                  <label className="mb-3">Lägg till så många roller som önskas, avsluta med kryss</label>
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div className="form-group">
+                        <label htmlFor="userRoleTitle"> Rolltitel </label>
+                        <input type="text" className="form-control" id="userRoleTitle" value={this.state.userRoleTitle} onChange={this.handleTextChange} placeholder="Ange roll titel"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <div className="form-group">
+                        <label htmlFor="userRoleDescription"> Rollbeskrivning </label>
+                        <textarea type="text" className="form-control" id="userRoleDescription" value={this.state.userRoleDescription} onChange={this.handleTextChange} placeholder="Ange roll beskrivning"/>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              }
               <div className="modal-footer">
-                <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Skicka in </button>
+                {!this.state.createdEventId &&
+                  <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Skicka in </button>}
+                  {this.state.createdEventId &&
+                    <button className="btn btn-primary" type="submit" onClick={this.addRole}> Lägg till roll </button>
+                  }
+                </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
+
+
     )
   }
 
-  sendRegistration = () =>{
+  sendRegistration=()=>{
 
-    Axios({
+  const promise = Promise.resolve(Axios({
       method: 'post',
       url: 'http://ellakk.zapto.org:5050/api/Admin/events/create',
       params:{userToken: sessionStorage.getItem("userToken")},
@@ -152,16 +186,34 @@ class CreateEventModal extends Component{
         eventAdressStreet: this.state.eventAdressStreet,
         eventAdressPostal: this.state.eventAdressPostal
       }
+    }).then(res => {
+      return res.data.eventId
+    }))
+
+    promise.then((value) =>{
+      this.setState({createdEventId: value})
+    })
+
+  }
+
+  addRole = () =>{
+    Axios({
+      method: 'post',
+      url: 'http://ellakk.zapto.org:5050/api/Admin/events/'+this.state.createdEventId+'/roles',
+      params:{userToken: sessionStorage.getItem("userToken")},
+      data: {
+        userRoleTitle: this.state.userRoleTitle,
+        userRoleDescription: this.state.userRoleDescription
+      }
     });
-
-    this.props.onClose()
-
+    this.setState({userRoleTitle: '',
+                  userRoleDescription: ''
+    })
   }
 
   handleTextChange=(event) => {
     const name = event.target.id;
     const value = event.target.value;
-    console.log(event.target.value)
     this.setState({
       [name]: value
     });

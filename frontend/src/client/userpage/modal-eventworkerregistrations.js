@@ -44,7 +44,7 @@ class EventWorkRegistrationModal extends Component{
               <div className="container-fluid">
                 <div className="modal-header">
                   <div>
-                    <h2 className="modal-title"> Eventmedarbetare </h2>
+                    <h3 className="modal-title"> Eventmedarbetare </h3>
                   </div>
                   <div>
                     <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
@@ -57,7 +57,7 @@ class EventWorkRegistrationModal extends Component{
                 </div>
 
                 <div className="modal-footer">
-                  <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Skicka in </button>
+
                 </div>
 
               </div>

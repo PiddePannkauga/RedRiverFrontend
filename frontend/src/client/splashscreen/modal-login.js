@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
 import {Route, Redirect } from 'react-router-dom';
-import {EventFinderContext} from '../../providers/provider-eventfinder';
+
 
 
 class LoginModal extends Component{

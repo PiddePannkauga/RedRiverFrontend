@@ -33,13 +33,15 @@ class ParticipantListModal extends Component{
     const modalStyle = {
       backgroundColor: '#fff',
       borderRadius: 5,
-      margin: '0 auto',
-      padding: '0 auto'
+      margin: 'auto',
+      padding: 'auto',
+      overflow: 'auto',
+      whitespace: 'nowrap'
     };
 
     return(
       <div className="backdrop" style={backdropStyle}>
-        <div className="modal-dialog modal-lg" style={modalStyle}>
+        <div className="modal-fade modal-lg" >
           <div className="modal-content">
             <div className="container-fluid">
               <div className="modal-header">
@@ -52,12 +54,12 @@ class ParticipantListModal extends Component{
                   </button>
                 </div>
               </div>
-              <div className="modal-body">
+              <div className="modal-body" style={modalStyle}>
                 {this.participantList(this.state.participantList)}
               </div>
 
               <div className="modal-footer">
-                
+
               </div>
 
             </div>
@@ -78,16 +80,51 @@ class ParticipantListModal extends Component{
   participantList = (arr) =>{
     const participanList= arr.map(obj=>{
       return(
-        <li>
-          {obj.participantNameFirst}
-          {obj.participantNameLast}
-        </li>
+        <tr key={obj.participantEmail}>
+          <td>
+            {obj.participantNameFirst}
+            &nbsp;
+            {obj.participantNameLast}
+          </td>
+          <td>
+            {obj.participantTelephone}
+            &nbsp;
+            {obj.participantEmail}
+          </td>
+          <td>
+            {obj.participantAdressStreet}
+            &nbsp;
+            {obj.participantAdressCity}
+            &nbsp;
+            {obj.participantAdressPostal}
+          </td>
+          <td>
+            {obj.participantVegan && "Vegan"}
+            &nbsp;
+            {obj.participantVegetarian && "Vegeterian"}
+            &nbsp;
+            {obj.participantTextareaAllergies}
+          </td>
+        </tr>
       );
     });
     return (
-      <ul className="no-bulletin">
-        {participanList}
-      </ul>
+      <div>
+        Antal deltagare: {arr.length}
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Namn</th>
+              <th>Kontaktinformation</th>
+              <th>Adress</th>
+              <th>Kostinformation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {participanList}
+          </tbody>
+        </table>
+      </div>
     )
 
   }
