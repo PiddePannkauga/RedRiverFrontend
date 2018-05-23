@@ -57,7 +57,7 @@ class EventWorkRegistrationModal extends Component{
                 </div>
 
                 <div className="modal-footer">
-                  <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Skicka in </button>
+
                 </div>
 
               </div>

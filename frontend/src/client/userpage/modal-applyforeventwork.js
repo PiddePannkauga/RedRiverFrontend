@@ -17,11 +17,11 @@ class ApplyForEventModal extends Component{
   }
 
   componentDidUpdate(prevProps, prevState, snapshot){
-    if(prevProps.event != this.props.event){
+    if(prevProps.event !== this.props.event){
       let roleDescription = '';
       let roleId = '';
       this.fetchEventRoles().then(res=>{
-        if(res.length != 0){
+        if(res.length !== 0){
           roleDescription = res[0].roleDescription
           roleId = res[0].roleId
         }

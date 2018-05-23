@@ -6,7 +6,7 @@ import LoginModal from './modal-login';
 import RegisterAccountModal from './modal-registerAccount';
 import EventInfoModal from './modal-eventinfo';
 import RegisterForEventModal from './modal-registerforevent';
-import {EventFinderContext} from '../../providers/provider-eventfinder';
+
 import Axios from 'axios';
 
 
