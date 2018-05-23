@@ -62,6 +62,10 @@ class ApplyForEventModal extends Component{
         backgroundColor: '#fff'
       }
 
+      const buttonStyle = {
+        cursor: 'pointer'
+      };
+
       const eventStart = new Date(Date.parse(this.props.event.eventStart))
       const eventEnd = new Date(Date.parse(this.props.event.eventEnd))
 
@@ -75,7 +79,7 @@ class ApplyForEventModal extends Component{
                     <h2 className="modal-title"> Ansök som Eventmedarbetare </h2>
                   </div>
                   <div>
-                    <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                    <button type="button" className="close" aria-label="Close" style={buttonStyle} onClick={this.props.onClose}>
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
@@ -134,7 +138,7 @@ class ApplyForEventModal extends Component{
                 </div>
 
                 <div className="modal-footer">
-                  <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Skicka in </button>
+                  <button className="btn btn-primary" type="submit" style={buttonStyle} onClick={this.sendRegistration}> Skicka in </button>
                 </div>
 
               </div>

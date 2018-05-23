@@ -39,9 +39,13 @@ class ParticipantListModal extends Component{
       whitespace: 'nowrap'
     };
 
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
+
     return(
       <div className="backdrop" style={backdropStyle}>
-        <div className="modal-fade modal-lg" >
+        <div className="modal-dialog modal-lg" style={modalStyle}>
           <div className="modal-content">
             <div className="container-fluid">
               <div className="modal-header">
@@ -49,7 +53,7 @@ class ParticipantListModal extends Component{
                   <h2 className="modal-title"> Deltagarlista </h2>
                 </div>
                 <div>
-                  <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                  <button type="button" className="close" aria-label="Close" style={buttonStyle} onClick={this.props.onClose}>
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>

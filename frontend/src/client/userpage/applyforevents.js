@@ -25,7 +25,6 @@ class ApplyForEvents extends Component{
   render(){
 
     const containerStyle = {
-
       minHeight: '100vh',
       minWidth: '100vw'
     }

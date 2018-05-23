@@ -37,6 +37,10 @@ class EventWorkRegistrationModal extends Component{
         padding: '0 auto'
       };
 
+      const buttonStyle = {
+        cursor: 'pointer'
+      };
+
       return(
         <div className="backdrop" style={backdropStyle}>
           <div className="modal-dialog modal-lg" style={modalStyle}>
@@ -47,7 +51,7 @@ class EventWorkRegistrationModal extends Component{
                     <h3 className="modal-title"> Eventmedarbetare </h3>
                   </div>
                   <div>
-                    <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                    <button type="button" className="close" aria-label="Close" style={buttonStyle} onClick={this.props.onClose}>
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>

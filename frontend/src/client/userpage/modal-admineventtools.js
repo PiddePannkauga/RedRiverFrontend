@@ -37,30 +37,29 @@ class AdminEventToolsModal extends Component{
       padding: '0 auto',
     };
 
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
+
     return(
       <div className="backdrop" style={backdropStyle}>
-        <div className="modal-dialog modal-dialog-centered" >
+        <div className="modal-dialog modal-lg" style={modalStyle}>
           <div className="modal-content">
             <div className="container-fluid">
-              <div className="modal-header" >
+              <div className="modal-header">
                   <h3 className="modal-title">Administrera Event</h3>
-                  <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                  <button type="button" className="close" aria-label="Close" style={buttonStyle} onClick={this.props.onClose}>
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
               </div>
               <div className="modal-body">
-                <div className="row justify-content-center mb-3">
-                  <div className="col-12">
-                    <button className="btn btn-primary w-auto mb-2" onClick={this.props.onParticipant}>Deltagare</button>
+                <div className="text-center">
+                  <div className="col-sm-12">
+                    <button className="btn btn-primary w-auto mr-1 mb-1" style={buttonStyle} onClick={this.props.onParticipant}>Deltagare</button>
+                    <button className="btn btn-primary w-auto mr-1 mb-1" style={buttonStyle} onClick={this.props.onEventWork}>Eventmedarbetare</button>
+                    <button className="btn btn-primary w-auto mr-1 mb-1" style={buttonStyle} onClick={this.props.onEdit}>Uppdatera Event</button>
                   </div>
-                  <div className="col-12">
-                    <button className="btn btn-primary w-auto mb-2" onClick={this.props.onEventWork}>Eventmedarbetare</button>
-                  </div>
-                  <div className="col-12">
-                    <button className="btn btn-primary w-auto mb-2" onClick={this.props.onEdit}>Uppdatera Event</button>
-                  </div>
-
                 </div>
                 <div className="row">
                   <div className="col-sm">
