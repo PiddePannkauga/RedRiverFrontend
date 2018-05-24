@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "main": "server.js",
-  "homepage":"/public",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0-beta.2",
