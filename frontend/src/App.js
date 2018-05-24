@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import UserPage from './client/userpage/userpage'
 import SplashScreen from './client/splashscreen/splashscreen';
