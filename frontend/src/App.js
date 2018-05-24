@@ -14,10 +14,10 @@ class App extends Component {
     return (
 
         <div className="App" style={{overflowX: 'hidden'}}>
-          <Redirect from="/" to="public" />
           <Switch>
           <Route path="/public" component={SplashScreen} />
           <Route path="/user" component={UserPage}/>
+          <Redirect from='/' to='public' />
           </Switch>
         </div>
 
