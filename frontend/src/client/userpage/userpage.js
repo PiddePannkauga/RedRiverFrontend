@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import EventFinder from '../eventfinder/eventinfo-display';
-import {EventFinderContext} from '../../providers/provider-eventfinder';
 import SearchBar from '../../components/searchbar';
 import EventWorkInfoModal from './modal-eventworkinfo';
 import UserPageNavbar from './navbar-userpage';

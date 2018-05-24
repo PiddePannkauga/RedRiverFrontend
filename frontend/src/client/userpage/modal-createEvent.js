@@ -46,6 +46,10 @@ class CreateEventModal extends Component{
       padding: '0 auto'
     };
 
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
+
     return(
       <div className="backdrop" style={backdropStyle}>
         <div className="modal-dialog modal-lg" style={modalStyle}>
@@ -59,7 +63,7 @@ class CreateEventModal extends Component{
                     <h2 className="modal-title"> Lägg till roller </h2>}
                 </div>
                 <div>
-                  <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                  <button type="button" className="close" aria-label="Close" style={buttonStyle} onClick={this.props.onClose}>
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -154,9 +158,9 @@ class CreateEventModal extends Component{
               }
               <div className="modal-footer">
                 {!this.state.createdEventId &&
-                  <button className="btn btn-primary" type="submit" onClick={this.sendRegistration}> Skicka in </button>}
+                  <button className="btn btn-primary" type="submit" style={buttonStyle} onClick={this.sendRegistration}> Skicka in </button>}
                   {this.state.createdEventId &&
-                    <button className="btn btn-primary" type="submit" onClick={this.addRole}> Lägg till roll </button>
+                    <button className="btn btn-primary" type="submit" style={buttonStyle} onClick={this.addRole}> Lägg till roll </button>
                   }
                 </div>
               </div>

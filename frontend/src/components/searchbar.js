@@ -12,7 +12,7 @@ class SearchBar extends Component{
 
     const searchbarStyle ={
       borderRadius: '1rem',
-      width: '50%',
+      width: '75%',
       margin: 'auto'
     };
 

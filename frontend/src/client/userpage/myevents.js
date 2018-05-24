@@ -26,7 +26,7 @@ class MyEvents extends Component{
   render(){
     return(
       <div>
-        <h2>Mina Events</h2>
+        <h2 className="text-center">Mina Events</h2>
         <EventFinder events={this.state.userEvents} searchTerm={this.state.searchTerm} onClick={this.toggleMyEventInfoWorkModal}/>
         {this.props.isAdmin && <MyCreatedEvents/>}
         <EventWorkInfoModal event={this.state.selectedEvent} show={this.state.isOpenMyEventModal} onClose={this.toggleMyEventInfoWorkModal}/>

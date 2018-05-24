@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 
 class EventWorkInfoModal extends Component{
 
-
   render(){
     if(!this.props.show) {
       return null;
@@ -26,9 +25,9 @@ class EventWorkInfoModal extends Component{
       padding: '0 auto'
     };
 
-    if(!this.props.show) {
-      return null;
-    }
+    const buttonStyle = {
+      cursor: 'pointer'
+    };
 
     return(
       <div className="backdrop" style={backdropStyle}>
@@ -38,7 +37,7 @@ class EventWorkInfoModal extends Component{
               <h2 className="modal-title">
                 {this.props.event.eventTitle}
               </h2>
-              <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+              <button type="button" className="close" aria-label="Close" style={buttonStyle} onClick={this.props.onClose}>
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -62,7 +61,7 @@ class EventWorkInfoModal extends Component{
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-primary" onClick={this.props.onRegister}> Anmäl </button>
+
             </div>
           </div>
         </div>
